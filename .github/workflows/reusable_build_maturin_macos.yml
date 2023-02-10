@@ -61,9 +61,9 @@ jobs:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip maturin pytest numpy twine        
+          python -m pip install --upgrade pip maturin pytest numpy twine
       - name: macos wheels
-        if: ${{ !inputs.universal2 || matrix.python-version < '3.8'}}
+        if: ${{ inputs.universal2 == false || matrix.python-version < '3.8'}}
         run: |
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i ${{ matrix.python.interpreter }} --out wheels  -m qoqo/Cargo.toml --release --locked
       - name: universal wheels
