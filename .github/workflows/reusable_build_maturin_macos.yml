@@ -63,11 +63,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip maturin pytest numpy twine
       - name: macos wheels
-        if: ${{ inputs.universal2 == false || matrix.python-version < '3.8'}}
+        if: ${{ inputs.universal2 == false || matrix.python.py < '3.8'}}
         run: |
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i ${{ matrix.python.interpreter }} --out wheels  -m qoqo/Cargo.toml --release --locked
       - name: universal wheels
-        if: ${{ inputs.universal2 && matrix.python-version >= '3.8' }}
+        if: ${{ inputs.universal2 && matrix.python.py >= '3.8' }}
         run: |
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i ${{ matrix.python.interpreter }} --universal2 --zig --out wheels  -m qoqo/Cargo.toml --release --locked
       - name: store artifact
