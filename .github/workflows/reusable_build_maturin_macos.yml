@@ -37,14 +37,10 @@ on:
 jobs:
 
   build_maturin_builds_macos:
-    name: maturin_build-${{ matrix.combinations.runs_on }}
-    needs: deploy_cratesio
-    runs-on: ${{ matrix.combinations.runs_on }}
+    name: maturin_build-macos-${{ matrix.python.interpreter }}
+    runs-on: 'macOS-latest'
     strategy:
       matrix:
-        combinations: [
-          { runs_on: 'macOS-latest', rust: "aarch64-apple-darwin" },
-        ]
         python: [
             {py: '3.7', interpreter: "python3.7"},
             {py: '3.8', interpreter: "python3.8"},
@@ -58,7 +54,7 @@ jobs:
         with:
           profile: minimal
           toolchain: stable
-          target: ${{ matrix.combinations.rust }}
+          target: "aarch64-apple-darwin"
           default: true
       - uses: actions/setup-python@v4.2.0
         with:
