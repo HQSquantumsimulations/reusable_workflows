@@ -73,7 +73,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install maturin pytest numpy
-          pip install ${{inputs.py_interface_folder}}
+          pip install ${{inputs.py_interface_folder}}/
       - name: test
         run: |
           pytest ${{inputs.py_interface_folder}}/python_tests
@@ -106,7 +106,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install maturin pytest numpy
-          pip install ${{inputs.py_interface_folder}}
+          pip install ${{inputs.py_interface_folder}}/
       - name: test
         if: ${{inputs.has_python_tests}}
         run: |
