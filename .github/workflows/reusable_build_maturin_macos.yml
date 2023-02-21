@@ -56,7 +56,7 @@ jobs:
           toolchain: stable
           target: "aarch64-apple-darwin"
           default: true
-      - uses: actions/setup-python@v4.2.0
+      - uses: actions/setup-python@v4.5
         with:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
@@ -66,39 +66,16 @@ jobs:
       - name: macos wheels
         if: ${{ inputs.universal2 == false || matrix.python.py < '3.8'}}
         run: |
-          RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i ${{ matrix.python.interpreter }} --out wheels  -m qoqo/Cargo.toml --release --locked
+          RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i ${{ matrix.python.interpreter }} --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
       - name: universal wheels
         if: ${{ inputs.universal2 && matrix.python.py >= '3.8' }}
         run: |
-          RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i ${{ matrix.python.interpreter }} --universal2 --out wheels  -m qoqo/Cargo.toml --release --locked
+          RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i ${{ matrix.python.interpreter }} --universal2 --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
       - name: store artifact
         uses: actions/upload-artifact@v3
         with:
           name: wheels
           path: wheels
-
-  # build_maturin_builds_macos:
-  #   name: maturin_build_macos
-  #   runs-on: 'macOS-latest'
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: Swatinem/rust-cache@v2
-  #     - uses: actions-rs/toolchain@v1
-  #       with:
-  #         profile: minimal
-  #         toolchain: stable
-  #         default: true
-  #     - name: macos wheels
-  #       uses: PyO3/maturin-action@v1
-  #       with:
-  #         maturin-version: latest
-  #         command: build
-  #         args: --find-interpreter --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --universal2 --locked
-  #     - name: store artifact
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: wheels
-  #         path: wheels
 
   deploy:
     if: ${{inputs.deploy}}

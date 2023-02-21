@@ -49,7 +49,7 @@ jobs:
           default: true
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.11'
       - name: linux wheels
         uses: PyO3/maturin-action@v1
         with:
@@ -64,7 +64,7 @@ jobs:
           path: wheels
 
   build_maturin_builds_linux_arm:
-    name: maturin_build-linux
+    name: maturin_build-linux-arm
     if: ${{inputs.build_for_arm}}
     runs-on: 'ubuntu-latest'
     steps:
@@ -77,14 +77,17 @@ jobs:
           default: true
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.11'
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v1
       - name: linux wheels
         uses: PyO3/maturin-action@v1
         with:
           maturin-version: latest
           command: build
           manylinux: 2014
-          args: --find-interpreter --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --zig --target aarch64-unknown-linux-gnu --release --locked
+          target: aarch64-unknown-linux-gnu
+          args: --find-interpreter --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
       - name: store artifact
         uses: actions/upload-artifact@v3
         with:
@@ -104,8 +107,7 @@ jobs:
           default: true
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
-          cache: 'pip'
+          python-version: '3.11'
       - name: linux wheels
         uses: PyO3/maturin-action@v1
         with:
