@@ -1,0 +1,116 @@
+name: reusable_build_tests_pure_python
+
+on:
+  workflow_dispatch:
+    inputs:
+      python_folder:
+        description: "Location of the python folder"
+        required: true
+        type: string
+      linting_folder:
+        description: "Location of the python folder to be linted"
+        required: true
+        type: string
+      test_code_coverage:
+        description: "Whether or not to check the coverage when running pytest"
+        required: true
+        type: bool
+      windows:
+        description: "Run unittests on windows"
+        required: false
+        default: false
+        type: boolean
+      macos:
+        description: "Run unittests on macOS"
+        required: false
+        default: true
+        type: boolean
+  workflow_call:
+    inputs:
+      python_folder:
+        description: "Location of the python folder"
+        required: true
+        type: string
+      test_code_coverage:
+        description: "Whether or not to check the coverage when running pytest"
+        required: true
+        type: bool
+      windows:
+        description: "Run unittests on windows"
+        required: false
+        default: false
+        type: boolean
+      macos:
+        description: "Run unittests on macOS"
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+
+  test_python_buildslinux:
+    name: python_check_linux-${{ matrix.python.interpreter }}
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        python: [
+            {py: '3.7', interpreter: "python3.7"},
+            {py: '3.8', interpreter: "python3.8"},
+            {py: '3.9', interpreter: "python3.9"},
+            {py: '3.10', interpreter: "python3.10"},
+            {py: '3.11', interpreter: "python3.11"},
+        ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python.py }}
+          cache: 'pip'
+      - name: Install dependencies
+        run: |
+          pip install pytest numpy
+          pip install ${{inputs.python_folder}}/
+      - name: Test with pytest
+        if: ${{inputs.test_code_coverage}}
+        run: |
+          pytest --cov=${{inputs.python_folder}}/tests/ --cov-fail-under=80
+        else:
+        run: |
+          pytest ${{inputs.python_folder}}/tests/
+
+
+  test_python_builds_windows:
+    name: python_check_windows-${{ matrix.python.interpreter }}
+    runs-on: "windows-latest"
+    strategy:
+      matrix:
+        python: [
+            {py: '3.7', interpreter: "python3.7"},
+            {py: '3.8', interpreter: "python3.8"},
+            {py: '3.9', interpreter: "python3.9"},
+            {py: '3.10', interpreter: "python3.10"},
+            {py: '3.11', interpreter: "python3.11"},
+        ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: Swatinem/rust-cache@v2.0.0
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python.py }}
+          cache: 'pip'
+      - name: Install dependencies
+        run: |
+          pip install pytest numpy
+          pip install ${{inputs.py_interface_folder}}/
+      - name: Test with pytest
+        if: ${{inputs.test_code_coverage}}
+        run: |
+          pytest --cov=${{inputs.python_folder}}/tests/ --cov-fail-under=80
+        else:
+        run: |
+          pytest ${{inputs.python_folder}}/tests/
