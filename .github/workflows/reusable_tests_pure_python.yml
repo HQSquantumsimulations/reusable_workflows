@@ -44,7 +44,7 @@ on:
 
 jobs:
 
-  test_python_builds_linux:
+  test_python_linux:
     name: python_check_linux-${{ matrix.python.interpreter }}
     runs-on: "ubuntu-latest"
     strategy:
@@ -75,7 +75,7 @@ jobs:
           pytest ${{inputs.python_folder}}/tests/
 
 
-  test_python_builds_windows:
+  test_python_windows:
     name: python_check_windows-${{ matrix.python.interpreter }}
     runs-on: "windows-latest"
     strategy:
@@ -89,12 +89,6 @@ jobs:
         ]
     steps:
       - uses: actions/checkout@v3
-      - uses: Swatinem/rust-cache@v2.0.0
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          default: true
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python.py }}
@@ -112,7 +106,7 @@ jobs:
           pytest ${{inputs.python_folder}}/tests/
 
 
-  test_python_builds_macos:
+  test_python_macos:
     name: python_check_macos-${{ matrix.python.interpreter }}
     runs-on: "macOS-latest"
     strategy:
@@ -126,12 +120,6 @@ jobs:
         ]
     steps:
       - uses: actions/checkout@v3
-      - uses: Swatinem/rust-cache@v2.0.0
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          default: true
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python.py }}
