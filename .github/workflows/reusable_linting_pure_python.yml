@@ -11,16 +11,6 @@ on:
         description: "Location of the python folder to be linted"
         required: true
         type: string
-      windows:
-        description: "Run unittests on windows"
-        required: false
-        default: false
-        type: boolean
-      macos:
-        description: "Run unittests on macOS"
-        required: false
-        default: true
-        type: boolean
   workflow_call:
     inputs:
       python_folder:
@@ -31,16 +21,6 @@ on:
         description: "Location of the python folder to be linted"
         required: true
         type: string
-      windows:
-        description: "Run unittests on windows"
-        required: false
-        default: false
-        type: boolean
-      macos:
-        description: "Run unittests on macOS"
-        required: false
-        default: true
-        type: boolean
 
 jobs:
 
@@ -57,33 +37,6 @@ jobs:
         run: |
           pip install pytest pytest-cov flake8 flake8-bugbear flake8-docstrings flake8-annotations darglint mypy qoqo
           pip install ${{inputs.python_folder}}/
-      - name: Lint with flake8
-        run: |
-          flake8 --config=${{inputs.python_folder}}/.flake8 ${{inputs.linting_folder}} --count
-      - name: Mypy check
-        run: |
-          mypy --config-file=${{inputs.python_folder}}/.mypy.ini ${{inputs.linting_folder}}
-
-
-  test_python_linting_windows:
-    name: python_check_linting_windows
-    runs-on: "windows-latest"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: Swatinem/rust-cache@v2.0.0
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          default: true
-      - uses: actions/setup-python@v4
-        with:
-        python-version: "3.9"
-          cache: 'pip'
-      - name: Install dependencies
-        run: |
-          pip install pytest pytest-cov flake8 flake8-bugbear flake8-docstrings flake8-annotations darglint mypy qoqo
-          pip install ${{inputs.py_interface_folder}}/
       - name: Lint with flake8
         run: |
           flake8 --config=${{inputs.python_folder}}/.flake8 ${{inputs.linting_folder}} --count
