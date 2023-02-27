@@ -154,7 +154,7 @@ jobs:
     if: ${{inputs.test_code_coverage}}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       - uses: Swatinem/rust-cache@v2
       - uses: actions-rs/toolchain@v1
         with:
