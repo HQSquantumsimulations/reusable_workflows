@@ -45,22 +45,13 @@ on:
 jobs:
 
   test_python_linting_linux:
-    name: python_check_linux-${{ matrix.python.interpreter }}
+    name: python_check_linting_linux
     runs-on: "ubuntu-latest"
-    strategy:
-      matrix:
-        python: [
-            {py: '3.7', interpreter: "python3.7"},
-            {py: '3.8', interpreter: "python3.8"},
-            {py: '3.9', interpreter: "python3.9"},
-            {py: '3.10', interpreter: "python3.10"},
-            {py: '3.11', interpreter: "python3.11"},
-        ]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python.py }}
+          python-version: "3.9"
           cache: 'pip'
       - name: Install dependencies
         run: |
@@ -75,17 +66,8 @@ jobs:
 
 
   test_python_linting_windows:
-    name: python_check_windows-${{ matrix.python.interpreter }}
+    name: python_check_linting_windows
     runs-on: "windows-latest"
-    strategy:
-      matrix:
-        python: [
-            {py: '3.7', interpreter: "python3.7"},
-            {py: '3.8', interpreter: "python3.8"},
-            {py: '3.9', interpreter: "python3.9"},
-            {py: '3.10', interpreter: "python3.10"},
-            {py: '3.11', interpreter: "python3.11"},
-        ]
     steps:
       - uses: actions/checkout@v3
       - uses: Swatinem/rust-cache@v2.0.0
@@ -96,7 +78,7 @@ jobs:
           default: true
       - uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python.py }}
+        python-version: "3.9"
           cache: 'pip'
       - name: Install dependencies
         run: |
