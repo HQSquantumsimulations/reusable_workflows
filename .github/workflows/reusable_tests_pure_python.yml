@@ -10,7 +10,7 @@ on:
       test_code_coverage:
         description: "Whether or not to check the coverage when running pytest"
         required: true
-        type: bool
+        type: boolean
       windows:
         description: "Run unittests on windows"
         required: false
@@ -30,7 +30,7 @@ on:
       test_code_coverage:
         description: "Whether or not to check the coverage when running pytest"
         required: true
-        type: bool
+        type: boolean
       windows:
         description: "Run unittests on windows"
         required: false
