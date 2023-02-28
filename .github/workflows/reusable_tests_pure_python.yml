@@ -69,10 +69,12 @@ jobs:
       - name: Test with pytest
         if: ${{inputs.test_code_coverage}}
         run: |
-          pytest --cov=${{inputs.python_folder}}/tests/ --cov-fail-under=80
+          cd ${{inputs.python_folder}}/tests/
+          pytest --cov=./ --cov-fail-under=80
         else:
         run: |
-          pytest ${{inputs.python_folder}}/tests/
+          cd ${{inputs.python_folder}}/tests/
+          pytest ./
 
 
   test_python_windows:
@@ -100,10 +102,12 @@ jobs:
       - name: Test with pytest
         if: ${{inputs.test_code_coverage}}
         run: |
-          pytest --cov=${{inputs.python_folder}}/tests/ --cov-fail-under=80
+          cd ${{inputs.python_folder}}/tests/
+          pytest --cov=./ --cov-fail-under=80
         else:
         run: |
-          pytest ${{inputs.python_folder}}/tests/
+          cd ${{inputs.python_folder}}/tests/
+          pytest ./
 
 
   test_python_macos:
@@ -131,7 +135,9 @@ jobs:
       - name: Test with pytest
         if: ${{inputs.test_code_coverage}}
         run: |
-          pytest --cov=${{inputs.python_folder}}/tests/ --cov-fail-under=80
+          cd ${{inputs.python_folder}}/tests/
+          pytest --cov=./ --cov-fail-under=80
         else:
         run: |
-          pytest ${{inputs.python_folder}}/tests/
+          cd ${{inputs.python_folder}}/tests/
+          pytest ./
