@@ -66,11 +66,12 @@ jobs:
         run: |
           pip install pytest numpy
           pip install ${{inputs.python_folder}}/
-      - name: Test with pytest
+      - name: Test with cpverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
           cd ${{inputs.python_folder}}/tests/
           pytest --cov=./ --cov-fail-under=80
+      - name: Test without coverage pytest
         if: ${{!inputs.test_code_coverage}}
         run: |
           cd ${{inputs.python_folder}}/tests/
@@ -99,11 +100,12 @@ jobs:
         run: |
           pip install pytest numpy
           pip install ${{inputs.py_interface_folder}}/
-      - name: Test with pytest
+      - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
           cd ${{inputs.python_folder}}/tests/
           pytest --cov=./ --cov-fail-under=80
+      - name: Test without coverage pytest
         if: ${{!inputs.test_code_coverage}}
         run: |
           cd ${{inputs.python_folder}}/tests/
@@ -132,11 +134,12 @@ jobs:
         run: |
           pip install pytest numpy
           pip install ${{inputs.py_interface_folder}}/
-      - name: Test with pytest
+      - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
           cd ${{inputs.python_folder}}/tests/
           pytest --cov=./ --cov-fail-under=80
+      - name: Test without coverage pytest
         if: ${{!inputs.test_code_coverage}}
         run: |
           cd ${{inputs.python_folder}}/tests/
