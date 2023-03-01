@@ -131,8 +131,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pytest numpy
-          cd ${{inputs.python_folder}}
-          pip install .
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
