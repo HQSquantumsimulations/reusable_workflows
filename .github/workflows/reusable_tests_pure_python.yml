@@ -65,15 +65,17 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pytest numpy
-          cd ${{inputs.python_folder}}
-          pip install .
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
           pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
+          cd ${{inputs.python_folder}}
+          pip install .
       - name: Test without coverage pytest
         if: ${{!inputs.test_code_coverage}}
         run: |
+          cd ${{inputs.python_folder}}
+          pip install .
           pytest tests/
 
 
@@ -98,15 +100,17 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pytest numpy
-          cd ${{inputs.python_folder}}
-          pip install .
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
+          cd ${{inputs.python_folder}}
+          pip install .
           pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
       - name: Test without coverage pytest
         if: ${{!inputs.test_code_coverage}}
         run: |
+          cd ${{inputs.python_folder}}
+          pip install .
           pytest tests/
 
 
@@ -134,8 +138,12 @@ jobs:
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
+          cd ${{inputs.python_folder}}
+          pip install .
           pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
       - name: Test without coverage pytest
         if: ${{!inputs.test_code_coverage}}
         run: |
+          cd ${{inputs.python_folder}}
+          pip install .
           pytest tests/
