@@ -45,7 +45,7 @@ on:
 jobs:
 
   test_python_linux:
-    name: python_check_linux-${{ matrix.python.interpreter }}
+    name: test_python_linux-${{ matrix.python.interpreter }}
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
@@ -65,21 +65,20 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pytest numpy
-          pip install ${{inputs.python_folder}}/
-      - name: Test with cpverage pytest
+          cd ${{inputs.python_folder}}
+          pip install .
+      - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
-          cd ${{inputs.python_folder}}/tests/
-          pytest --cov=./ --cov-fail-under=80
+          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
       - name: Test without coverage pytest
         if: ${{!inputs.test_code_coverage}}
         run: |
-          cd ${{inputs.python_folder}}/tests/
-          pytest ./
+          pytest tests/
 
 
   test_python_windows:
-    name: python_check_windows-${{ matrix.python.interpreter }}
+    name: test_python_windows-${{ matrix.python.interpreter }}
     runs-on: "windows-latest"
     strategy:
       matrix:
@@ -99,21 +98,20 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pytest numpy
-          pip install ${{inputs.py_interface_folder}}/
+          cd ${{inputs.python_folder}}
+          pip install .
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
-          cd ${{inputs.python_folder}}/tests/
-          pytest --cov=./ --cov-fail-under=80
+          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
       - name: Test without coverage pytest
         if: ${{!inputs.test_code_coverage}}
         run: |
-          cd ${{inputs.python_folder}}/tests/
-          pytest ./
+          pytest tests/
 
 
   test_python_macos:
-    name: python_check_macos-${{ matrix.python.interpreter }}
+    name: test_python_macos-${{ matrix.python.interpreter }}
     runs-on: "macOS-latest"
     strategy:
       matrix:
@@ -133,14 +131,13 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pytest numpy
-          pip install ${{inputs.py_interface_folder}}/
+          cd ${{inputs.python_folder}}
+          pip install .
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
-          cd ${{inputs.python_folder}}/tests/
-          pytest --cov=./ --cov-fail-under=80
+          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
       - name: Test without coverage pytest
         if: ${{!inputs.test_code_coverage}}
         run: |
-          cd ${{inputs.python_folder}}/tests/
-          pytest ./
+          pytest tests/
