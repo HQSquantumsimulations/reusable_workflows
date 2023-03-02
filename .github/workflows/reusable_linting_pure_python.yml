@@ -35,14 +35,17 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
-          pip install pytest pytest-cov flake8 flake8-bugbear flake8-docstrings flake8-annotations darglint mypy black qoqo
+          pip install .[dev]
           pip install ${{inputs.python_folder}}/
       - name: Lint with flake8
         run: |
-          flake8 --config=${{inputs.python_folder}}/.flake8 ${{inputs.linting_folder}} --count
+          cd ${{inputs.python_folder}}/
+          flake8 ${{inputs.linting_folder}} --count
       - name: Mypy check
         run: |
-          mypy --config-file=${{inputs.python_folder}}/.mypy.ini ${{inputs.linting_folder}}
+          cd ${{inputs.python_folder}}/
+          mypy ${{inputs.linting_folder}}
       - name: Black formatting check
         run: |
+          cd ${{inputs.python_folder}}/
           black --check ${{inputs.linting_folder}}
