@@ -64,18 +64,16 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
-          pip install .[tests]
+          pip install ${{inputs.python_folder}}/[tests]
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
           cd ${{inputs.python_folder}}
-          pip install .
           pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
       - name: Test without coverage pytest
         if: ${{!inputs.test_code_coverage}}
         run: |
           cd ${{inputs.python_folder}}
-          pip install .
           pytest tests/
 
 
@@ -99,18 +97,16 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
-          pip install .[tests]
+          pip install ${{inputs.python_folder}}/[tests]
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
           cd ${{inputs.python_folder}}
-          pip install .
           pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
       - name: Test without coverage pytest
         if: ${{!inputs.test_code_coverage}}
         run: |
           cd ${{inputs.python_folder}}
-          pip install .
           pytest tests/
 
 
@@ -134,16 +130,14 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
-          pip install .[tests]
+          pip install ${{inputs.python_folder}}/[tests]
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
           cd ${{inputs.python_folder}}
-          pip install .
           pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
       - name: Test without coverage pytest
         if: ${{!inputs.test_code_coverage}}
         run: |
           cd ${{inputs.python_folder}}
-          pip install .
           pytest tests/
