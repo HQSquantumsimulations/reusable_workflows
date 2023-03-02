@@ -64,7 +64,7 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
-          pip install pytest numpy
+          pip install .[tests]
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
@@ -99,7 +99,7 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
-          pip install pytest numpy
+          pip install .[tests]
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
@@ -134,7 +134,7 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
-          pip install pytest numpy
+          pip install .[tests]
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
         run: |
