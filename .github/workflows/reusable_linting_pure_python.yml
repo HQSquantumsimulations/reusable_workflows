@@ -35,8 +35,7 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
-          pip install .[dev]
-          pip install ${{inputs.python_folder}}/
+          pip install ${{inputs.python_folder}}/[dev]
       - name: Lint with flake8
         run: |
           cd ${{inputs.python_folder}}/
