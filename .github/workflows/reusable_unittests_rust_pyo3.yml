@@ -70,7 +70,6 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python.py }}
-          cache: 'pip'
       - run: |
           python -m pip install numpy
           cargo test --workspace --no-default-features --locked
@@ -100,7 +99,6 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python.py }}
-          cache: 'pip'
       - run: |
           python -m pip install numpy
           cargo test --workspace --no-default-features --locked
@@ -129,7 +127,6 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python.py }}
-          cache: 'pip'
       - run: |
           python -m pip install numpy
           cargo test --workspace --no-default-features --locked
