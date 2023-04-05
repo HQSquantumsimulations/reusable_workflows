@@ -91,7 +91,7 @@ jobs:
       - name: store artifact
         uses: actions/upload-artifact@v3
         with:
-          name: wheels
+          name: wheels_arm
           path: wheels
 
   build_maturin_src_builds_linux:
@@ -122,7 +122,7 @@ jobs:
 
   deploy:
     if: ${{inputs.deploy}}
-    needs: [build_maturin_src_builds_linux, build_maturin_builds_linux_arm, build_maturin_builds_linux]
+    needs: [build_maturin_src_builds_linux, build_maturin_builds_linux]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-python@v4
@@ -139,4 +139,26 @@ jobs:
         python -m pip install --upgrade pip
         pip install twine
         python -m twine upload --skip-existing *
+
+  deploy-arm:
+    if: ${{inputs.deploy && inputs.build_for_arm}}
+    needs: [build_maturin_builds_linux_arm]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+    - uses: actions/download-artifact@v3
+      with:
+        name: wheels_arm
+    - name: Publish
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+      run: |
+        python -m pip install --upgrade pip
+        pip install twine
+        python -m twine upload --skip-existing *
+
+  
 
