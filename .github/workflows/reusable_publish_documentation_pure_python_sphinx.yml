@@ -1,4 +1,4 @@
-name: reusable_publish_documentation_pure_python
+name: reusable_publish_documentation_pure_python_sphinx
 
 on:
   workflow_dispatch:
