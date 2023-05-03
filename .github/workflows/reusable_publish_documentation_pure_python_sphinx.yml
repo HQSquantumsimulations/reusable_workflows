@@ -3,21 +3,21 @@ name: reusable_publish_documentation_pure_python_sphinx
 on:
   workflow_dispatch:
     inputs:
-      py_interface_folder:
-        description: "Location of the py interface folder"
+      python_folder:
+        description: "Location of the python folder"
         required: true
         type: string
-      py_docs_folder:
+      docs_folder:
         description: "Location of the sphinx doc folder"
         required: true
         type: string
   workflow_call:
     inputs:
-      py_interface_folder:
-        description: "Location of the py interface folder"
+      python_folder:
+        description: "Location of the python folder"
         required: true
         type: string
-      py_docs_folder:
+      docs_folder:
         description: "Location of the sphinx doc folder"
         required: true
         type: string
