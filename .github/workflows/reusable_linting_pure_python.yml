@@ -35,10 +35,10 @@ jobs:
       - name: Install dependencies
         run: |
           pip install ${{inputs.python_folder}}/[dev]
-      - name: Lint with flake8
+      - name: Lint with ruff
         run: |
           cd ${{inputs.python_folder}}/
-          flake8 ${{inputs.linting_folder}} --count
+          ruff check ${{inputs.linting_folder}} --count
       - name: Mypy check
         run: |
           cd ${{inputs.python_folder}}/
