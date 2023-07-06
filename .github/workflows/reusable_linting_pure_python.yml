@@ -38,7 +38,7 @@ jobs:
       - name: Lint with ruff
         run: |
           cd ${{inputs.python_folder}}/
-          ruff check ${{inputs.linting_folder}} --count
+          ruff check ${{inputs.linting_folder}}
       - name: Mypy check
         run: |
           cd ${{inputs.python_folder}}/
