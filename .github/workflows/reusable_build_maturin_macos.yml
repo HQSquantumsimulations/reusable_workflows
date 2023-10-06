@@ -46,6 +46,7 @@ jobs:
             {py: '3.9', interpreter: "python3.9"},
             {py: '3.10', interpreter: "python3.10"},
             {py: '3.11', interpreter: "python3.11"}
+            {py: '3.12', interpreter: "python3.12"}
         ]
     steps:
       - uses: actions/checkout@v3
@@ -84,7 +85,7 @@ jobs:
     steps:
     - uses: actions/setup-python@v4
       with:
-        python-version: "3.11"
+        python-version: "3.12"
     - uses: actions/download-artifact@v3
       with:
         name: wheels
