@@ -81,6 +81,7 @@ jobs:
 
   test_maturin_builds_windows:
     name: maturin_check_windows-${{ matrix.python.interpreter }}
+    if: ${{inputs.windows}}
     runs-on: "windows-latest"
     strategy:
       matrix:
