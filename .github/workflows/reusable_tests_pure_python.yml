@@ -21,6 +21,11 @@ on:
         required: false
         default: true
         type: boolean
+      python_3_12:
+        description: "Run unittest on Python 3.12"
+        required: false
+        default: true
+        type: boolean
   workflow_call:
     inputs:
       python_folder:
@@ -41,6 +46,11 @@ on:
         required: false
         default: true
         type: boolean
+      python_3_12:
+        description: "Run unittest on Python 3.12"
+        required: false
+        default: true
+        type: boolean
 
 jobs:
 
@@ -56,6 +66,7 @@ jobs:
             {py: '3.11', interpreter: "python3.11"},
             {py: '3.12', interpreter: "python3.12"},
         ]
+    if: ${{ matrix.python.py != '3.12' || inputs.python_3_12 }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -88,6 +99,7 @@ jobs:
             {py: '3.11', interpreter: "python3.11"},
             {py: '3.12', interpreter: "python3.12"},
         ]
+    if: ${{ matrix.python.py != '3.12' || inputs.python_3_12 }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -120,6 +132,7 @@ jobs:
             {py: '3.11', interpreter: "python3.11"},
             {py: '3.12', interpreter: "python3.12"},
         ]
+    if: ${{ matrix.python.py != '3.12' || inputs.python_3_12 }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
