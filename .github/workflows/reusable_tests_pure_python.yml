@@ -66,7 +66,6 @@ jobs:
             {py: '3.11', interpreter: "python3.11"},
             # {py: '3.12', interpreter: "python3.12"},
         ]
-    if: ${{ matrix.python.py != '3.12' || inputs.python_3_12 }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -121,7 +120,6 @@ jobs:
             {py: '3.11', interpreter: "python3.11"},
             {py: '3.12', interpreter: "python3.12"},
         ]
-    if: ${{ matrix.python.py != '3.12' || inputs.python_3_12 }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -174,9 +172,8 @@ jobs:
             {py: '3.9', interpreter: "python3.9"},
             {py: '3.10', interpreter: "python3.10"},
             {py: '3.11', interpreter: "python3.11"},
-            {py: '3.12', interpreter: "python3.12"},
+            # {py: '3.12', interpreter: "python3.12"},
         ]
-    if: ${{ matrix.python.py != '3.12' || inputs.python_3_12 }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
