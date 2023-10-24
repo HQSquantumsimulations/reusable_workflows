@@ -195,8 +195,8 @@ jobs:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
         run: |
-          pip install maturin pytest numpy
-          pip install ${{inputs.py_interface_folder}}/
+          python -m pip install maturin pytest numpy
+          python -m pip install ${{inputs.py_interface_folder}}/
       - name: test
         if: ${{inputs.has_python_tests}}
         run: |
