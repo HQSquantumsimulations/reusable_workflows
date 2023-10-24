@@ -140,7 +140,7 @@ jobs:
           pytest tests/
   
   test_python_windows_py312:
-    name: test_python_windows-python_3.12
+    name: test_python_windows-python3.12
     if: ${{ inputs.python_3_12 }}
     runs-on: "windows-latest"
     steps:
