@@ -114,7 +114,6 @@ jobs:
 
   test_maturin_builds_macos:
     name: maturin_check_macos-${{ matrix.python.interpreter }}
-    continue-on-error: true   # IMPORTANT: this will show the green "successful job" tick even when it failed
     if: ${{inputs.macos}}
     runs-on: "macOS-latest"
     strategy:
