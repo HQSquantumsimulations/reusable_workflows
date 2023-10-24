@@ -21,6 +21,11 @@ on:
         required: false
         default: true
         type: boolean
+      python_3_12:
+        description: "Run unittest on Python 3.12"
+        required: false
+        default: true
+        type: boolean
   workflow_call:
     inputs:
       python_folder:
@@ -41,6 +46,11 @@ on:
         required: false
         default: true
         type: boolean
+      python_3_12:
+        description: "Run unittest on Python 3.12"
+        required: false
+        default: true
+        type: boolean
 
 jobs:
 
@@ -54,7 +64,7 @@ jobs:
             {py: '3.9', interpreter: "python3.9"},
             {py: '3.10', interpreter: "python3.10"},
             {py: '3.11', interpreter: "python3.11"},
-            {py: '3.12', interpreter: "python3.12"},
+            # {py: '3.12', interpreter: "python3.12"},
         ]
     steps:
       - uses: actions/checkout@v3
@@ -74,7 +84,29 @@ jobs:
         run: |
           cd ${{inputs.python_folder}}
           pytest tests/
-
+  
+  test_python_linux_py312:
+    name: test_python_linux-python3.12
+    if: ${{ inputs.python_3_12 }}
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          pip install ${{inputs.python_folder}}/[tests]
+      - name: Test with coverage pytest
+        if: ${{inputs.test_code_coverage}}
+        run: |
+          cd ${{inputs.python_folder}}
+          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
+      - name: Test without coverage pytest
+        if: ${{!inputs.test_code_coverage}}
+        run: |
+          cd ${{inputs.python_folder}}
+          pytest tests/
 
   test_python_windows:
     name: test_python_windows-${{ matrix.python.interpreter }}
@@ -88,6 +120,7 @@ jobs:
             {py: '3.11', interpreter: "python3.11"},
             {py: '3.12', interpreter: "python3.12"},
         ]
+    if: ${{ matrix.python.py != '3.12' || inputs.python_3_12 }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -106,7 +139,29 @@ jobs:
         run: |
           cd ${{inputs.python_folder}}
           pytest tests/
-
+  
+  test_python_windows_py312:
+    name: test_python_windows-python_3.12
+    if: ${{ inputs.python_3_12 }}
+    runs-on: "windows-latest"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          pip install ${{inputs.python_folder}}/[tests]
+      - name: Test with coverage pytest
+        if: ${{inputs.test_code_coverage}}
+        run: |
+          cd ${{inputs.python_folder}}
+          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
+      - name: Test without coverage pytest
+        if: ${{!inputs.test_code_coverage}}
+        run: |
+          cd ${{inputs.python_folder}}
+          pytest tests/
 
   test_python_macos:
     name: test_python_macos-${{ matrix.python.interpreter }}
@@ -125,6 +180,29 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python.py }}
+      - name: Install dependencies
+        run: |
+          pip install ${{inputs.python_folder}}/[tests]
+      - name: Test with coverage pytest
+        if: ${{inputs.test_code_coverage}}
+        run: |
+          cd ${{inputs.python_folder}}
+          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
+      - name: Test without coverage pytest
+        if: ${{!inputs.test_code_coverage}}
+        run: |
+          cd ${{inputs.python_folder}}
+          pytest tests/
+  
+  test_python_macos_py312:
+    name: test_python_macos-python3.12
+    if: ${{ inputs.python_3_12 }}
+    runs-on: "macOS-latest"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
       - name: Install dependencies
         run: |
           pip install ${{inputs.python_folder}}/[tests]
