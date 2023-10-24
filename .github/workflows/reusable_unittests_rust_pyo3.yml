@@ -57,7 +57,7 @@ on:
 jobs:
 
   unittests_check_windows:
-    if: ${{inputs.windows}}
+    if: ${{ inputs.windows }}
     name: unittests-windows-${{ matrix.python.interpreter }}
     runs-on: "windows-latest"
     strategy:
@@ -67,39 +67,8 @@ jobs:
             {py: '3.9', interpreter: "python3.9"},
             {py: '3.10', interpreter: "python3.10"},
             {py: '3.11', interpreter: "python3.11"},
-            {py: '3.12', interpreter: "python3.12"},
+            # {py: '3.12', interpreter: "python3.12"},
         ]
-    if: ${{ matrix.python.py != '3.12' || inputs.python_3_12 }}
-    steps:
-      - uses: actions/checkout@v3
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          default: true
-      - uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python.py }}
-      - run: |
-          python -m pip install numpy
-          cargo test --workspace --no-default-features --locked
-
-
-  unittests_check_macos:
-    if: ${{inputs.macos}}
-    name: unittests-macos-${{ matrix.python.interpreter }}
-    runs-on: "macOS-latest"
-    strategy:
-      matrix:
-        python: [
-            {py: '3.8', interpreter: "python3.8"},
-            {py: '3.9', interpreter: "python3.9"},
-            {py: '3.10', interpreter: "python3.10"},
-            {py: '3.11', interpreter: "python3.11"},
-            {py: '3.12', interpreter: "python3.12"},
-        ]
-    if: ${{ matrix.python.py != '3.12' || inputs.python_3_12 }}
     steps:
       - uses: actions/checkout@v3
       # - uses: Swatinem/rust-cache@v2
@@ -115,6 +84,72 @@ jobs:
           python -m pip install numpy
           cargo test --workspace --no-default-features --locked
   
+  unittests_check_windows_py312:
+    if: ${{ inputs.windows && inputs.python_3_12 }}
+    name: unittests-windows-python3.12
+    runs-on: "windows-latest"
+    steps:
+      - uses: actions/checkout@v3
+      # - uses: Swatinem/rust-cache@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m pip install numpy
+          cargo test --workspace --no-default-features --locked
+
+  unittests_check_macos:
+    if: ${{ inputs.macos }}
+    name: unittests-macos-${{ matrix.python.interpreter }}
+    runs-on: "macOS-latest"
+    strategy:
+      matrix:
+        python: [
+            {py: '3.8', interpreter: "python3.8"},
+            {py: '3.9', interpreter: "python3.9"},
+            {py: '3.10', interpreter: "python3.10"},
+            {py: '3.11', interpreter: "python3.11"},
+            # {py: '3.12', interpreter: "python3.12"},
+        ]
+    steps:
+      - uses: actions/checkout@v3
+      # - uses: Swatinem/rust-cache@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python.py }}
+      - run: |
+          python -m pip install numpy
+          cargo test --workspace --no-default-features --locked
+  
+  unittests_check_macos_py312:
+    if: ${{ inputs.macos && inputs.python_3_12 }}
+    name: unittests-macos-python3.12
+    runs-on: "macOS-latest"
+    steps:
+      - uses: actions/checkout@v3
+      # - uses: Swatinem/rust-cache@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m pip install numpy
+          cargo test --workspace --no-default-features --locked
+  
   unittests_check_linux:
     name: unittests-macos-${{ matrix.python.interpreter }}
     runs-on: "ubuntu-latest"
@@ -125,9 +160,8 @@ jobs:
             {py: '3.9', interpreter: "python3.9"},
             {py: '3.10', interpreter: "python3.10"},
             {py: '3.11', interpreter: "python3.11"},
-            {py: '3.12', interpreter: "python3.12"},
+            # {py: '3.12', interpreter: "python3.12"},
         ]
-    if: ${{ matrix.python.py != '3.12' || inputs.python_3_12 }}
     steps:
       - uses: actions/checkout@v3
       # - uses: Swatinem/rust-cache@v2
@@ -144,9 +178,29 @@ jobs:
           python -m pip install numpy
           cargo test --workspace --no-default-features --locked
           cargo fmt --all -- --check
+  
+  unittests_check_linux_py312:
+    name: unittests-macos-python3.12
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v3
+      # - uses: Swatinem/rust-cache@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+          components: rustfmt
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m pip install numpy
+          cargo test --workspace --no-default-features --locked
+          cargo fmt --all -- --check
 
   doctest_check:
-    name: unittests_check-${{ matrix.combinations.runs_on }}
+    name: unittests_check-ubuntu-latest
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
