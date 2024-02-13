@@ -96,6 +96,7 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: |
+          pip install setuptools
           pip install ${{inputs.python_folder}}/[tests]
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
@@ -150,6 +151,7 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: |
+          pip install setuptools
           pip install ${{inputs.python_folder}}/[tests]
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
@@ -204,6 +206,7 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: |
+          pip install setuptools
           pip install ${{inputs.python_folder}}/[tests]
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}

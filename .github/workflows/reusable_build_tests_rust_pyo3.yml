@@ -104,7 +104,7 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: |
-          pip install maturin pytest numpy
+          pip install maturin pytest numpy setuptools
           pip install ${{inputs.py_interface_folder}}/
       - name: test
         if: ${{inputs.has_python_tests}}
@@ -161,7 +161,7 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: |
-          pip install maturin pytest numpy
+          pip install maturin pytest numpy setuptools
           pip install ${{inputs.py_interface_folder}}/
       - name: test
         if: ${{inputs.has_python_tests}}
@@ -220,7 +220,7 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: |
-          pip install maturin pytest numpy
+          pip install maturin pytest numpy setuptools
           pip install ${{inputs.py_interface_folder}}/
       - name: test
         if: ${{inputs.has_python_tests}}
