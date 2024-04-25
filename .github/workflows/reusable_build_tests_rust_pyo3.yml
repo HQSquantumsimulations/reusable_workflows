@@ -171,7 +171,7 @@ jobs:
   test_maturin_builds_macos:
     name: maturin_check_macos-${{ matrix.python.interpreter }}
     if: ${{ inputs.macos }}
-    runs-on: "macOS-latest"
+    runs-on: "macOS-13"
     strategy:
       matrix:
         python: [

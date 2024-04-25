@@ -106,7 +106,7 @@ jobs:
   unittests_check_macos:
     if: ${{ inputs.macos }}
     name: unittests-macos-${{ matrix.python.interpreter }}
-    runs-on: "macOS-latest"
+    runs-on: "macOS-13"
     strategy:
       matrix:
         python: [
