@@ -205,7 +205,7 @@ jobs:
   test_maturin_builds_macos_py312:
     name: maturin_check_macos-python3.12
     if: ${{ inputs.macos && inputs.python_3_12 }}
-    runs-on: "macOS-latest"
+    runs-on: "macOS-13"
     steps:
       - uses: actions/checkout@v3
       # - uses: Swatinem/rust-cache@v2.0.0

@@ -91,7 +91,7 @@ jobs:
   build_maturin_builds_macos_py312:
     if: ${{ inputs.python_3_12 }}
     name: maturin_build-macos-python3.12
-    runs-on: 'macOS-latest'
+    runs-on: 'macOS-13'
     steps:
       - uses: actions/checkout@v3
       - uses: actions-rs/toolchain@v1
