@@ -85,8 +85,8 @@ jobs:
       - name: store artifact
         uses: actions/upload-artifact@v3
         with:
-          name: wheels
-          path: wheels
+          name: macos_wheels
+          path: macos_wheels
     
   build_maturin_builds_macos_py312:
     if: ${{ inputs.python_3_12 }}
@@ -119,8 +119,8 @@ jobs:
       - name: store artifact
         uses: actions/upload-artifact@v3
         with:
-          name: wheels
-          path: wheels
+          name: macos_wheels
+          path: macos_wheels
 
   deploy:
     if: ${{inputs.deploy}}
@@ -132,7 +132,7 @@ jobs:
         python-version: "3.12"
     - uses: actions/download-artifact@v3
       with:
-        name: wheels
+        name: macos_wheels
     - name: Publish
       env:
         TWINE_USERNAME: __token__
