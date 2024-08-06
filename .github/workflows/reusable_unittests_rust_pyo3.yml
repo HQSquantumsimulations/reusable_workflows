@@ -22,6 +22,16 @@ on:
         description: "Name of the pure rust package"
         required: true
         type: string
+      python_3_8:
+        description: "Run unittest on Python 3.8"
+        required: false
+        default: true
+        type: boolean
+      python_3_9:
+        description: "Run unittest on Python 3.9"
+        required: false
+        default: true
+        type: boolean
       python_3_12:
         description: "Run unittest on Python 3.12"
         required: false
