@@ -84,7 +84,7 @@ on:
         default: ""
         type: string
 env:
-  DEFAULT_FEATURES_VALUE: ${{ inputs.features || ' ' }}
+  DEFAULT_FEATURES_VALUE: ${{ inputs.features || 'json_schema' }}
 
 jobs:
   unittests_check_windows:
