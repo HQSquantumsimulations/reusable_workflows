@@ -113,7 +113,7 @@ jobs:
           python-version: ${{ matrix.python.py }}
       - run: |
           python -m pip install numpy
-          cargo test --workspace --no-default-features --locked --features ${{ env.DEFAULT_FEATURES_VALUE || 'json_schema' }}
+          cargo test --workspace --no-default-features --locked --features "${{ env.DEFAULT_FEATURES_VALUE || 'json_schema' }}"
 
   unittests_check_windows_py3_8:
     if: ${{ inputs.windows && inputs.python_3_8 }}
