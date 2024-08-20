@@ -83,8 +83,8 @@ on:
         required: false
         # default: ""
         type: string
-env:
-  DEFAULT_FEATURES_VALUE: "${{ inputs.features || 'json_schema' }}"
+# env:
+#   DEFAULT_FEATURES_VALUE: "${{ inputs.features || 'json_schema' }}"
 
 jobs:
   unittests_check_windows:
@@ -113,7 +113,7 @@ jobs:
           python-version: ${{ matrix.python.py }}
       - run: |
           python -m pip install numpy
-          cargo test --workspace --no-default-features --locked --features ${{ env.DEFAULT_FEATURES_VALUE }}
+          cargo test --workspace --no-default-features --locked --features "${{ inputs.features || 'json_schema' }}""
 
   unittests_check_windows_py3_8:
     if: ${{ inputs.windows && inputs.python_3_8 }}
