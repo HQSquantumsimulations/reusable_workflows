@@ -38,9 +38,8 @@ on:
         default: true
         type: boolean
       features:
-        description: "Additional features to be enabled for the Rust package"
+        description: "Additional features to be enabled for the Rust package separated with commas"
         required: false
-        # default: ""
         type: string
   workflow_call:
     inputs:
@@ -79,12 +78,9 @@ on:
         default: true
         type: boolean
       features:
-        description: "Additional features to be enabled for the Rust package"
+        description: "Additional features to be enabled for the Rust package separated with commas"
         required: false
-        # default: ""
         type: string
-# env:
-#   DEFAULT_FEATURES_VALUE: "${{ inputs.features || 'json_schema' }}"
 
 jobs:
   unittests_check_windows:
