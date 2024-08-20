@@ -82,7 +82,7 @@ on:
         required: false
         type: string
 env:
-  DEFAULT_FEATURES_VALUE: ${{ github.events.inputs.features || '' }}
+  DEFAULT_FEATURES_VALUE: ${{ github.events.inputs.features || ' ' }}
 
 jobs:
   unittests_check_windows:
