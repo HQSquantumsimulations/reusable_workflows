@@ -40,7 +40,7 @@ on:
       features:
         description: "Additional features to be enabled for the Rust package"
         required: false
-        default: ""
+        # default: ""
         type: string
   workflow_call:
     inputs:
@@ -81,10 +81,10 @@ on:
       features:
         description: "Additional features to be enabled for the Rust package"
         required: false
-        default: ""
+        # default: ""
         type: string
-env:
-  DEFAULT_FEATURES_VALUE: ${{ inputs.features || 'json_schema' }}
+# env:
+#   DEFAULT_FEATURES_VALUE: ${{ inputs.features || 'json_schema' }}
 
 jobs:
   unittests_check_windows:
@@ -113,7 +113,7 @@ jobs:
           python-version: ${{ matrix.python.py }}
       - run: |
           python -m pip install numpy
-          cargo test --workspace --no-default-features --locked --features json_schema
+          cargo test --workspace --no-default-features --locked --features ${{ inputs.features || '' }}
 
   unittests_check_windows_py3_8:
     if: ${{ inputs.windows && inputs.python_3_8 }}
