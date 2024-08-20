@@ -47,7 +47,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: windows_wheels
-          path: windows_wheels
+          path: wheels
 
   deploy:
     if: ${{inputs.deploy}}

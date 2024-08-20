@@ -86,7 +86,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: macos_wheels
-          path: macos_wheels
+          path: wheels
     
   build_maturin_builds_macos_py312:
     if: ${{ inputs.python_3_12 }}
@@ -120,7 +120,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: macos_wheels
-          path: macos_wheels
+          path: wheels
 
   deploy:
     if: ${{inputs.deploy}}
