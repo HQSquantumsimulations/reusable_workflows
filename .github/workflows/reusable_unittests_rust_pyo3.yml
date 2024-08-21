@@ -38,7 +38,7 @@ on:
         default: true
         type: boolean
       features:
-        description: "Additional features to be enabled for the Rust package separated with commas"
+        description: "Additional features to be enabled for the Rust package separated with commas or whitespaces"
         required: false
         type: string
   workflow_call:
@@ -78,7 +78,7 @@ on:
         default: true
         type: boolean
       features:
-        description: "Additional features to be enabled for the Rust package separated with commas"
+        description: "Additional features to be enabled for the Rust package separated with commas or whitespaces"
         required: false
         type: string
 
