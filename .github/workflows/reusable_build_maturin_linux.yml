@@ -60,7 +60,7 @@ jobs:
       - name: store artifact
         uses: actions/upload-artifact@v3
         with:
-          name: wheels
+          name: linux_wheels
           path: wheels
 
   build_maturin_builds_linux_arm:
@@ -91,7 +91,7 @@ jobs:
       - name: store artifact
         uses: actions/upload-artifact@v3
         with:
-          name: wheels_arm
+          name: linux_arm_wheels
           path: wheels
 
   build_maturin_src_builds_linux:
@@ -117,7 +117,7 @@ jobs:
       - name: store artifact
         uses: actions/upload-artifact@v3
         with:
-          name: wheels
+          name: linux_sdist
           path: wheels
 
   deploy:
@@ -130,7 +130,10 @@ jobs:
         python-version: "3.12"
     - uses: actions/download-artifact@v3
       with:
-        name: wheels
+        name: linux_wheels
+    - uses: actions/download-artifact@v3
+      with:
+        name: linux_sdist
     - name: Publish
       env:
         TWINE_USERNAME: __token__
@@ -150,7 +153,7 @@ jobs:
         python-version: "3.12"
     - uses: actions/download-artifact@v3
       with:
-        name: wheels_arm
+        name: linux_arm_wheels
     - name: Publish
       env:
         TWINE_USERNAME: __token__
