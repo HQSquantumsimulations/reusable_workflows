@@ -27,6 +27,11 @@ on:
         required: false
         default: true
         type: boolean
+      python_3_13:
+        description: "Run unittest on Python 3.13"
+        required: false
+        default: false
+        type: boolean
   workflow_call:
     inputs:
       py_interface_folder:
@@ -52,6 +57,11 @@ on:
         description: "Run unittest on Python 3.12"
         required: false
         default: true
+        type: boolean
+      python_3_13:
+        description: "Run unittest on Python 3.13"
+        required: false
+        default: false
         type: boolean
 
 jobs:
@@ -101,6 +111,30 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          pip install maturin pytest numpy setuptools
+          pip install ${{inputs.py_interface_folder}}/
+      - name: test
+        if: ${{inputs.has_python_tests}}
+        run: |
+          pytest ${{inputs.py_interface_folder}}/python_tests
+  
+  test_maturin_builds_linux_py313:
+    if: ${{ inputs.python_3_13 }}
+    name: maturin_check_linux-python3.13
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v3
+      # - uses: Swatinem/rust-cache@v2.0.0
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
       - name: Install dependencies
         run: |
           pip install maturin pytest numpy setuptools
@@ -165,6 +199,30 @@ jobs:
         if: ${{inputs.has_python_tests}}
         run: |
           pytest ${{inputs.py_interface_folder}}/python_tests
+  
+  test_maturin_builds_windows_py313:
+    name: maturin_check_windows-python3.13
+    if: ${{ inputs.windows && inputs.python_3_13 }}
+    runs-on: "windows-latest"
+    steps:
+      - uses: actions/checkout@v3
+      # - uses: Swatinem/rust-cache@v2.0.0
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+      - name: Install dependencies
+        run: |
+          pip install maturin pytest numpy setuptools
+          pip install ${{inputs.py_interface_folder}}/
+      - name: test
+        if: ${{inputs.has_python_tests}}
+        run: |
+          pytest ${{inputs.py_interface_folder}}/python_tests
 
   test_maturin_builds_macos:
     name: maturin_check_macos-${{ matrix.python.interpreter }}
@@ -215,6 +273,31 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          pip install maturin pytest numpy setuptools
+          pip install ${{inputs.py_interface_folder}}/
+      - name: test
+        if: ${{inputs.has_python_tests}}
+        run: |
+          pytest ${{inputs.py_interface_folder}}/python_tests
+  
+  test_maturin_builds_macos_py313:
+    name: maturin_check_macos-python3.13
+    if: ${{ inputs.macos && inputs.python_3_13 }}
+    runs-on: "macOS-13"
+    steps:
+      - uses: actions/checkout@v3
+      # - uses: Swatinem/rust-cache@v2.0.0
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          target: "aarch64-apple-darwin"
+          default: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
       - name: Install dependencies
         run: |
           pip install maturin pytest numpy setuptools
