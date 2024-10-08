@@ -79,7 +79,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Setup QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
       - name: linux wheels
         uses: PyO3/maturin-action@v1
         with:
