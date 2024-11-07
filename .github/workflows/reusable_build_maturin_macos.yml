@@ -92,7 +92,7 @@ jobs:
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i ${{ matrix.python.interpreter }} --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked --target x86_64-apple-darwin
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i ${{ matrix.python.interpreter }} --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked --target aarch64-apple-darwin
       - name: store artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: macos_wheels
           path: wheels
@@ -126,7 +126,7 @@ jobs:
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i "python3.12" --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked --target x86_64-apple-darwin
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i "python3.12" --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked --target aarch64-apple-darwin
       - name: store artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: macos_wheels
           path: wheels
@@ -160,7 +160,7 @@ jobs:
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i "python3.13" --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked --target x86_64-apple-darwin
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i "python3.13" --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked --target aarch64-apple-darwin
       - name: store artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: macos_wheels
           path: wheels
@@ -173,7 +173,7 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: "3.12"
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: macos_wheels
     - name: Publish
