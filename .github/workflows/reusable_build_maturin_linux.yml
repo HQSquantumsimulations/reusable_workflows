@@ -58,7 +58,7 @@ jobs:
           manylinux: 2014
           args: --find-interpreter --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
       - name: store artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linux_wheels
           path: wheels
@@ -89,7 +89,7 @@ jobs:
           target: aarch64-unknown-linux-gnu
           args: --find-interpreter --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
       - name: store artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linux_arm_wheels
           path: wheels
@@ -115,7 +115,7 @@ jobs:
           command: sdist
           args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml
       - name: store artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linux_sdist
           path: wheels
@@ -128,10 +128,10 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: "3.12"
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: linux_wheels
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: linux_sdist
     - name: Publish
@@ -151,7 +151,7 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: "3.12"
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: linux_arm_wheels
     - name: Publish
