@@ -94,7 +94,7 @@ jobs:
       - name: store artifact
         uses: actions/upload-artifact@v4
         with:
-          name: macos_wheels
+          name: macos_wheels_p_39_310_311
           path: wheels
     
   build_maturin_builds_macos_py312:
@@ -128,7 +128,7 @@ jobs:
       - name: store artifact
         uses: actions/upload-artifact@v4
         with:
-          name: macos_wheels
+          name: macos_wheels_p_312
           path: wheels
   
   build_maturin_builds_macos_py313:
@@ -162,7 +162,7 @@ jobs:
       - name: store artifact
         uses: actions/upload-artifact@v4
         with:
-          name: macos_wheels
+          name: macos_wheels_p_313
           path: wheels
 
   deploy:
@@ -175,7 +175,9 @@ jobs:
         python-version: "3.12"
     - uses: actions/download-artifact@v4
       with:
-        name: macos_wheels
+        path: wheels
+        pattern: macos_wheels_p*
+        merge-multiple: true        
     - name: Publish
       env:
         TWINE_USERNAME: __token__
