@@ -21,16 +21,6 @@ on:
         required: false
         default: true
         type: boolean
-      python_3_9:
-        description: "Run unittest on Python 3.9"
-        required: false
-        default: true
-        type: boolean
-      python_3_12:
-        description: "Run unittest on Python 3.12"
-        required: false
-        default: true
-        type: boolean
       python_3_13:
         description: "Run unittest on Python 3.13"
         required: false
@@ -56,16 +46,6 @@ on:
         required: false
         default: true
         type: boolean
-      python_3_9:
-        description: "Run unittest on Python 3.9"
-        required: false
-        default: true
-        type: boolean
-      python_3_12:
-        description: "Run unittest on Python 3.12"
-        required: false
-        default: true
-        type: boolean
       python_3_13:
         description: "Run unittest on Python 3.13"
         required: false
@@ -79,10 +59,10 @@ jobs:
     strategy:
       matrix:
         python: [
-            # { py: "3.9", interpreter: "python3.9" },
+            { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
-            # {py: '3.12', interpreter: "python3.12"},
+            { py: '3.12', interpreter: "python3.12" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -91,54 +71,6 @@ jobs:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
         run: |
-          pip install ${{inputs.python_folder}}/[tests]
-      - name: Test with coverage pytest
-        if: ${{inputs.test_code_coverage}}
-        run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
-      - name: Test without coverage pytest
-        if: ${{!inputs.test_code_coverage}}
-        run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/
-
-  test_python_linux_py3_9:
-    name: test_python_linux-python3.9
-    if: ${{ inputs.python_3_9 }}
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-      - name: Install dependencies
-        run: |
-          pip install setuptools
-          pip install ${{inputs.python_folder}}/[tests]
-      - name: Test with coverage pytest
-        if: ${{inputs.test_code_coverage}}
-        run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
-      - name: Test without coverage pytest
-        if: ${{!inputs.test_code_coverage}}
-        run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/
-
-  test_python_linux_py3_12:
-    name: test_python_linux-python3.12
-    if: ${{ inputs.python_3_12 }}
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-      - name: Install dependencies
-        run: |
-          pip install setuptools
           pip install ${{inputs.python_folder}}/[tests]
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
@@ -181,10 +113,10 @@ jobs:
     strategy:
       matrix:
         python: [
-            # { py: "3.9", interpreter: "python3.9" },
+            { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
-            # {py: '3.12', interpreter: "python3.12"},
+            {py: '3.12', interpreter: "python3.12"},
           ]
     steps:
       - uses: actions/checkout@v4
@@ -193,54 +125,6 @@ jobs:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
         run: |
-          pip install ${{inputs.python_folder}}/[tests]
-      - name: Test with coverage pytest
-        if: ${{inputs.test_code_coverage}}
-        run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
-      - name: Test without coverage pytest
-        if: ${{!inputs.test_code_coverage}}
-        run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/
-
-  test_python_windows_py3_9:
-    name: test_python_windows-python3.9
-    if: ${{ inputs.python_3_9 }}
-    runs-on: "windows-latest"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-      - name: Install dependencies
-        run: |
-          pip install setuptools
-          pip install ${{inputs.python_folder}}/[tests]
-      - name: Test with coverage pytest
-        if: ${{inputs.test_code_coverage}}
-        run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
-      - name: Test without coverage pytest
-        if: ${{!inputs.test_code_coverage}}
-        run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/
-
-  test_python_windows_py3_12:
-    name: test_python_windows-python3.12
-    if: ${{ inputs.python_3_12 }}
-    runs-on: "windows-latest"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-      - name: Install dependencies
-        run: |
-          pip install setuptools
           pip install ${{inputs.python_folder}}/[tests]
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}
@@ -283,10 +167,10 @@ jobs:
     strategy:
       matrix:
         python: [
-            # { py: "3.9", interpreter: "python3.9" },
+            { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
-            # {py: '3.12', interpreter: "python3.12"},
+            {py: '3.12', interpreter: "python3.12"},
           ]
     steps:
       - uses: actions/checkout@v4
@@ -295,54 +179,6 @@ jobs:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
         run: |
-          pip install ${{inputs.python_folder}}/[tests]
-      - name: Test with coverage pytest
-        if: ${{inputs.test_code_coverage}}
-        run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
-      - name: Test without coverage pytest
-        if: ${{!inputs.test_code_coverage}}
-        run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/
-
-  test_python_macos_py3_9:
-    name: test_python_macos-python3.9
-    if: ${{ inputs.python_3_9 }}
-    runs-on: "macOS-13"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-      - name: Install dependencies
-        run: |
-          pip install setuptools
-          pip install ${{inputs.python_folder}}/[tests]
-      - name: Test with coverage pytest
-        if: ${{inputs.test_code_coverage}}
-        run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
-      - name: Test without coverage pytest
-        if: ${{!inputs.test_code_coverage}}
-        run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/
-
-  test_python_macos_py3_12:
-    name: test_python_macos-python3.12
-    if: ${{ inputs.python_3_12 }}
-    runs-on: "macOS-13"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-      - name: Install dependencies
-        run: |
-          pip install setuptools
           pip install ${{inputs.python_folder}}/[tests]
       - name: Test with coverage pytest
         if: ${{inputs.test_code_coverage}}

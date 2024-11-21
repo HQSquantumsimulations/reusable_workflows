@@ -22,11 +22,6 @@ on:
         required: false
         default: true
         type: boolean
-      python_3_12:
-        description: "Run unittest on Python 3.12"
-        required: false
-        default: true
-        type: boolean
       python_3_13:
         description: "Run unittest on Python 3.13"
         required: false
@@ -53,11 +48,6 @@ on:
         required: false
         default: true
         type: boolean
-      python_3_12:
-        description: "Run unittest on Python 3.12"
-        required: false
-        default: true
-        type: boolean
       python_3_13:
         description: "Run unittest on Python 3.13"
         required: false
@@ -74,7 +64,7 @@ jobs:
             {py: '3.9', interpreter: "python3.9"},
             {py: '3.10', interpreter: "python3.10"},
             {py: '3.11', interpreter: "python3.11"},
-            # {py: '3.12', interpreter: "python3.12"},
+            {py: '3.12', interpreter: "python3.12"},
         ]
     steps:
       - uses: actions/checkout@v4
@@ -90,30 +80,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install maturin pytest numpy
-          pip install ${{inputs.py_interface_folder}}/
-      - name: test
-        if: ${{inputs.has_python_tests}}
-        run: |
-          pytest ${{inputs.py_interface_folder}}/python_tests
-  
-  test_maturin_builds_linux_py312:
-    if: ${{ inputs.python_3_12 }}
-    name: maturin_check_linux-python3.12
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@v3
-      # - uses: Swatinem/rust-cache@v2.0.0
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          default: true
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'
-      - name: Install dependencies
-        run: |
-          pip install maturin pytest numpy setuptools
           pip install ${{inputs.py_interface_folder}}/
       - name: test
         if: ${{inputs.has_python_tests}}
@@ -154,7 +120,7 @@ jobs:
             {py: '3.9', interpreter: "python3.9"},
             {py: '3.10', interpreter: "python3.10"},
             {py: '3.11', interpreter: "python3.11"},
-            # {py: '3.12', interpreter: "python3.12"},
+            {py: '3.12', interpreter: "python3.12"},
         ]
     steps:
       - uses: actions/checkout@v4
@@ -170,30 +136,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install maturin pytest numpy
-          pip install ${{inputs.py_interface_folder}}/
-      - name: test
-        if: ${{inputs.has_python_tests}}
-        run: |
-          pytest ${{inputs.py_interface_folder}}/python_tests
-  
-  test_maturin_builds_windows_py312:
-    name: maturin_check_windows-python3.12
-    if: ${{ inputs.windows && inputs.python_3_12 }}
-    runs-on: "windows-latest"
-    steps:
-      - uses: actions/checkout@v3
-      # - uses: Swatinem/rust-cache@v2.0.0
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          default: true
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'
-      - name: Install dependencies
-        run: |
-          pip install maturin pytest numpy setuptools
           pip install ${{inputs.py_interface_folder}}/
       - name: test
         if: ${{inputs.has_python_tests}}
@@ -234,7 +176,7 @@ jobs:
             {py: '3.9', interpreter: "python3.9"},
             {py: '3.10', interpreter: "python3.10"},
             {py: '3.11', interpreter: "python3.11"},
-            # {py: '3.12', interpreter: "python3.12"},
+            {py: '3.12', interpreter: "python3.12"},
         ]
     steps:
       - uses: actions/checkout@v3
@@ -252,31 +194,6 @@ jobs:
         run: |
           python -m pip install maturin pytest numpy
           python -m pip install ${{inputs.py_interface_folder}}/
-      - name: test
-        if: ${{inputs.has_python_tests}}
-        run: |
-          pytest ${{inputs.py_interface_folder}}/python_tests
-  
-  test_maturin_builds_macos_py312:
-    name: maturin_check_macos-python3.12
-    if: ${{ inputs.macos && inputs.python_3_12 }}
-    runs-on: "macOS-13"
-    steps:
-      - uses: actions/checkout@v3
-      # - uses: Swatinem/rust-cache@v2.0.0
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          target: "aarch64-apple-darwin"
-          default: true
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'
-      - name: Install dependencies
-        run: |
-          pip install maturin pytest numpy setuptools
-          pip install ${{inputs.py_interface_folder}}/
       - name: test
         if: ${{inputs.has_python_tests}}
         run: |
