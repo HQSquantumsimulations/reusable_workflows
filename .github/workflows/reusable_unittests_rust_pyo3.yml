@@ -22,16 +22,6 @@ on:
         description: "Name of the pure rust package"
         required: true
         type: string
-      python_3_9:
-        description: "Run unittest on Python 3.9"
-        required: false
-        default: true
-        type: boolean
-      python_3_12:
-        description: "Run unittest on Python 3.12"
-        required: false
-        default: true
-        type: boolean
       features:
         description: "Additional features to be enabled for the Rust package separated with commas or whitespaces"
         required: false
@@ -57,16 +47,6 @@ on:
         description: "Name of the pure rust package"
         required: true
         type: string
-      python_3_9:
-        description: "Run unittest on Python 3.9"
-        required: false
-        default: true
-        type: boolean
-      python_3_12:
-        description: "Run unittest on Python 3.12"
-        required: false
-        default: true
-        type: boolean
       features:
         description: "Additional features to be enabled for the Rust package separated with commas or whitespaces"
         required: false
@@ -80,10 +60,10 @@ jobs:
     strategy:
       matrix:
         python: [
-            # { py: "3.9", interpreter: "python3.9" },
+            { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
-            # {py: '3.12', interpreter: "python3.12"},
+            { py: '3.12', interpreter: "python3.12" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -96,44 +76,6 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python.py }}
-      - run: |
-          python -m pip install numpy
-          cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
-
-  unittests_check_windows_py3_9:
-    if: ${{ inputs.windows && inputs.python_3_9 }}
-    name: unittests-windows-python3.9
-    runs-on: "windows-latest"
-    steps:
-      - uses: actions/checkout@v3
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          default: true
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-      - run: |
-          python -m pip install numpy
-          cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
-
-  unittests_check_windows_py3_12:
-    if: ${{ inputs.windows && inputs.python_3_12 }}
-    name: unittests-windows-python3.12
-    runs-on: "windows-latest"
-    steps:
-      - uses: actions/checkout@v3
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          default: true
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
       - run: |
           python -m pip install numpy
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
@@ -145,10 +87,10 @@ jobs:
     strategy:
       matrix:
         python: [
-            # { py: "3.9", interpreter: "python3.9" },
+            { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
-            # {py: '3.12', interpreter: "python3.12"},
+            { py: '3.12', interpreter: "python3.12" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -161,44 +103,6 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python.py }}
-      - run: |
-          python -m pip install numpy
-          cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
-
-  unittests_check_macos_py3_9:
-    if: ${{ inputs.macos && inputs.python_3_9 }}
-    name: unittests-macos-python3.9
-    runs-on: "macOS-13"
-    steps:
-      - uses: actions/checkout@v3
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          default: true
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-      - run: |
-          python -m pip install numpy
-          cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
-
-  unittests_check_macos_py3_12:
-    if: ${{ inputs.macos && inputs.python_3_12 }}
-    name: unittests-macos-python3.12
-    runs-on: "macOS-13"
-    steps:
-      - uses: actions/checkout@v3
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          default: true
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
       - run: |
           python -m pip install numpy
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
@@ -209,10 +113,10 @@ jobs:
     strategy:
       matrix:
         python: [
-            # { py: "3.9", interpreter: "python3.9" },
+            { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
-            # {py: '3.12', interpreter: "python3.12"},
+            { py: '3.12', interpreter: "python3.12" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -226,46 +130,6 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python.py }}
-      - run: |
-          python -m pip install numpy
-          cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
-          cargo fmt --all -- --check
-
-  unittests_check_linux_py3_9:
-    name: unittests-linux-python3.9
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@v3
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          default: true
-          components: rustfmt
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
-      - run: |
-          python -m pip install numpy
-          cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
-          cargo fmt --all -- --check
-
-  unittests_check_linux_py3_12:
-    name: unittests-linux-python3.12
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@v3
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          default: true
-          components: rustfmt
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
       - run: |
           python -m pip install numpy
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
