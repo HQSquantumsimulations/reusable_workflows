@@ -22,6 +22,11 @@ on:
         description: "Name of the pure rust package"
         required: true
         type: string
+      python_3_13:
+        description: "Run unittest on Python 3.13"
+        required: false
+        default: false
+        type: boolean
       features:
         description: "Additional features to be enabled for the Rust package separated with commas or whitespaces"
         required: false
@@ -47,6 +52,11 @@ on:
         description: "Name of the pure rust package"
         required: true
         type: string
+      python_3_13:
+        description: "Run unittest on Python 3.13"
+        required: false
+        default: false
+        type: boolean
       features:
         description: "Additional features to be enabled for the Rust package separated with commas or whitespaces"
         required: false
@@ -80,6 +90,25 @@ jobs:
           python -m pip install numpy
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
 
+  unittests_check_windows_py3_13:
+    if: ${{ inputs.windows && inputs.python_3_13 }}
+    name: unittests-windows-python3.13
+    runs-on: "windows-latest"
+    steps:
+      - uses: actions/checkout@v3
+      # - uses: Swatinem/rust-cache@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+      - run: |
+          python -m pip install numpy
+          cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
+
   unittests_check_macos:
     if: ${{ inputs.macos }}
     name: unittests-macos-${{ matrix.python.interpreter }}
@@ -107,6 +136,25 @@ jobs:
           python -m pip install numpy
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
 
+  unittests_check_macos_py3_13:
+    if: ${{ inputs.macos && inputs.python_3_13 }}
+    name: unittests-macos-python3.13
+    runs-on: "macOS-13"
+    steps:
+      - uses: actions/checkout@v3
+      # - uses: Swatinem/rust-cache@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+      - run: |
+          python -m pip install numpy
+          cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
+          
   unittests_check_linux:
     name: unittests-linux-${{ matrix.python.interpreter }}
     runs-on: "ubuntu-latest"
@@ -130,6 +178,26 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python.py }}
+      - run: |
+          python -m pip install numpy
+          cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
+          cargo fmt --all -- --check
+
+  unittests_check_linux_py3_13:
+    name: unittests-linux-python3.13
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v3
+      # - uses: Swatinem/rust-cache@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+          components: rustfmt
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
       - run: |
           python -m pip install numpy
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
