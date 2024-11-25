@@ -184,6 +184,7 @@ jobs:
           cargo fmt --all -- --check
 
   unittests_check_linux_py3_13:
+    if: ${{ inputs.python_3_13 }}
     name: unittests-linux-python3.13
     runs-on: "ubuntu-latest"
     steps:
