@@ -69,11 +69,12 @@ jobs:
     runs-on: "windows-latest"
     strategy:
       matrix:
-        python: [
+        python:
+          [
             { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
-            { py: '3.12', interpreter: "python3.12" },
+            { py: "3.12", interpreter: "python3.12" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -115,11 +116,12 @@ jobs:
     runs-on: "macOS-13"
     strategy:
       matrix:
-        python: [
+        python:
+          [
             { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
-            { py: '3.12', interpreter: "python3.12" },
+            { py: "3.12", interpreter: "python3.12" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -154,17 +156,18 @@ jobs:
       - run: |
           python -m pip install numpy
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
-          
+
   unittests_check_linux:
     name: unittests-linux-${{ matrix.python.interpreter }}
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        python: [
+        python:
+          [
             { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
-            { py: '3.12', interpreter: "python3.12" },
+            { py: "3.12", interpreter: "python3.12" },
           ]
     steps:
       - uses: actions/checkout@v4
