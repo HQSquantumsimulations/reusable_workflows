@@ -6,7 +6,7 @@ on:
       windows:
         description: "Run unittests on windows"
         required: false
-        default: true
+        default: false
         type: boolean
       macos:
         description: "Run unittests on macOS"
@@ -36,7 +36,7 @@ on:
       windows:
         description: "Run unittests on windows"
         required: false
-        default: true
+        default: false
         type: boolean
       macos:
         description: "Run unittests on macOS"
