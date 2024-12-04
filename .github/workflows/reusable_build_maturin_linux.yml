@@ -74,7 +74,7 @@ jobs:
 
   build_maturin_builds_linux_py313:
     if: ${{ inputs.python_3_13 }}
-    name: maturin_build-linux
+    name: maturin_build-linux-py313
     runs-on: 'ubuntu-latest'
     steps:
       - uses: actions/checkout@v4
@@ -132,7 +132,7 @@ jobs:
           path: wheels
   
   build_maturin_builds_linux_arm_py313:
-    name: maturin_build-linux-arm
+    name: maturin_build-linux-arm-py313
     if: ${{inputs.build_for_arm && inputs.python_3_13}}
     runs-on: 'ubuntu-latest'
     steps:
@@ -211,7 +211,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install twine
-        python -m twine upload --skip-existing *
+        python -m twine upload --skip-existing wheels/*
 
   deploy-arm:
     if: ${{inputs.deploy && inputs.build_for_arm}}
@@ -233,7 +233,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install twine
-        python -m twine upload --skip-existing *
+        python -m twine upload --skip-existing wheels/*
 
   
 

@@ -60,7 +60,7 @@ jobs:
   
   build_maturin_builds_windows_py313:
     if: ${{ inputs.python_3_13 }}
-    name: maturin_build-windows
+    name: maturin_build-windows-py313
     runs-on: 'windows-latest'
     steps:
       - uses: actions/checkout@v4
@@ -102,4 +102,4 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install twine
-        python -m twine upload --skip-existing *
+        python -m twine upload --skip-existing wheels/*
