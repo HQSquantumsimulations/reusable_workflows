@@ -18,7 +18,7 @@ on:
         default: true
         type: boolean
       python_3_13:
-        description: "Run unittest on Python 3.13"
+        description: "Build for Python 3.13"
         required: false
         default: false
         type: boolean
@@ -39,7 +39,7 @@ on:
         default: true
         type: boolean
       python_3_13:
-        description: "Run unittest on Python 3.13"
+        description: "Build for Python 3.13"
         required: false
         default: false
         type: boolean
