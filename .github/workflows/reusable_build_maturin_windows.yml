@@ -15,7 +15,7 @@ on:
       python_3_13:
         description: "Build for Python 3.13"
         required: false
-        default: false
+        default: true
         type: boolean
   workflow_call:
     inputs:
@@ -31,7 +31,7 @@ on:
       python_3_13:
         description: "Build for Python 3.13"
         required: false
-        default: false
+        default: true
         type: boolean
 
 jobs:

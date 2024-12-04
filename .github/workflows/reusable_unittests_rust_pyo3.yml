@@ -25,7 +25,7 @@ on:
       python_3_13:
         description: "Run unittest on Python 3.13"
         required: false
-        default: false
+        default: true
         type: boolean
       features:
         description: "Additional features to be enabled for the Rust package separated with commas or whitespaces"
@@ -55,7 +55,7 @@ on:
       python_3_13:
         description: "Run unittest on Python 3.13"
         required: false
-        default: false
+        default: true
         type: boolean
       features:
         description: "Additional features to be enabled for the Rust package separated with commas or whitespaces"
