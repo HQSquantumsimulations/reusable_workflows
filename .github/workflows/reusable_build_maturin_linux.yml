@@ -17,6 +17,11 @@ on:
         required: false
         default: false
         type: boolean
+      python_3_13:
+        description: "Build for Python 3.13"
+        required: false
+        default: true
+        type: boolean
   workflow_call:
     inputs:
       py_interface_folder:
@@ -33,9 +38,13 @@ on:
         required: false
         default: false
         type: boolean
+      python_3_13:
+        description: "Build for Python 3.13"
+        required: false
+        default: true
+        type: boolean
 
 jobs:
-
   build_maturin_builds_linux:
     name: maturin_build-linux
     runs-on: 'ubuntu-latest'
@@ -56,11 +65,39 @@ jobs:
           maturin-version: latest
           command: build
           manylinux: 2014
-          args: --find-interpreter --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
+          args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked -i python3.9 python3.10 python3.11 python3.12
       - name: store artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux_wheels
+          name: linux_wheels_p_3.9_3.10_3.11_3.12
+          path: wheels
+
+  build_maturin_builds_linux_py313:
+    if: ${{ inputs.python_3_13 }}
+    name: maturin_build-linux
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v4
+      # - uses: Swatinem/rust-cache@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: linux wheels
+        uses: PyO3/maturin-action@v1
+        with:
+          maturin-version: latest
+          command: build
+          manylinux: 2014
+          args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked -i python3.13
+      - name: store artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux_wheels_p_3.13
           path: wheels
 
   build_maturin_builds_linux_arm:
@@ -87,11 +124,42 @@ jobs:
           command: build
           manylinux: 2014
           target: aarch64-unknown-linux-gnu
-          args: --find-interpreter --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
+          args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked -i python3.9 python3.10 python3.11 python3.12
       - name: store artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux_arm_wheels
+          name: linux_arm_wheels_p_3.9_3.10_3.11_3.12
+          path: wheels
+  
+  build_maturin_builds_linux_arm_py313:
+    name: maturin_build-linux-arm
+    if: ${{inputs.build_for_arm && inputs.python_3_13}}
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v4
+      # - uses: Swatinem/rust-cache@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: linux wheels
+        uses: PyO3/maturin-action@v1
+        with:
+          maturin-version: latest
+          command: build
+          manylinux: 2014
+          target: aarch64-unknown-linux-gnu
+          args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked -i python3.13
+      - name: store artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux_arm_wheels_p_3.13
           path: wheels
 
   build_maturin_src_builds_linux:
@@ -130,7 +198,9 @@ jobs:
         python-version: "3.12"
     - uses: actions/download-artifact@v4
       with:
-        name: linux_wheels
+        path: wheels
+        pattern: linux_wheels_p*
+        merge-multiple: true  
     - uses: actions/download-artifact@v4
       with:
         name: linux_sdist
@@ -153,7 +223,9 @@ jobs:
         python-version: "3.12"
     - uses: actions/download-artifact@v4
       with:
-        name: linux_arm_wheels
+        path: wheels
+        pattern: linux_arm_wheels_p*
+        merge-multiple: true  
     - name: Publish
       env:
         TWINE_USERNAME: __token__

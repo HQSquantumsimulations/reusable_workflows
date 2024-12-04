@@ -18,9 +18,9 @@ on:
         default: true
         type: boolean
       python_3_13:
-        description: "Run unittest on Python 3.13"
+        description: "Build for Python 3.13"
         required: false
-        default: false
+        default: true
         type: boolean
   workflow_call:
     inputs:
@@ -39,9 +39,9 @@ on:
         default: true
         type: boolean
       python_3_13:
-        description: "Run unittest on Python 3.13"
+        description: "Build for Python 3.13"
         required: false
-        default: false
+        default: true
         type: boolean
 
 jobs:
