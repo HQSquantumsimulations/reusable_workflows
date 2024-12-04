@@ -56,7 +56,7 @@ jobs:
           maturin-version: latest
           command: build
           manylinux: 2014
-          args: --find-interpreter --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
+          args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked -i python3.9 python3.10 python3.11 python3.12
       - name: store artifact
         uses: actions/upload-artifact@v4
         with:
@@ -87,7 +87,7 @@ jobs:
           command: build
           manylinux: 2014
           target: aarch64-unknown-linux-gnu
-          args: --find-interpreter --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
+          args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked -i python3.9 python3.10 python3.11 python3.12
       - name: store artifact
         uses: actions/upload-artifact@v4
         with:

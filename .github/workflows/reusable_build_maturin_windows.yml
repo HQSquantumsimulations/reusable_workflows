@@ -25,7 +25,6 @@ on:
         type: boolean
 
 jobs:
-
   build_maturin_builds_windows:
     name: maturin_build-windows
     runs-on: 'windows-latest'
@@ -42,7 +41,7 @@ jobs:
         with:
           maturin-version: latest
           command: build
-          args: --find-interpreter --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
+          args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked -i python3.9 python3.10 python3.11 python3.12
       - name: store artifact
         uses: actions/upload-artifact@v4
         with:
