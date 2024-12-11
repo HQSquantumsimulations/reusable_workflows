@@ -23,7 +23,6 @@ on:
         type: string
 
 jobs:
-
   publish_documentation:
     runs-on: ubuntu-latest
     steps:
@@ -34,14 +33,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip maturin
-        pip install ${{inputs.python_folder}}/[docs]
+        pip install ${{ inputs.python_folder }}/[docs]
     - name: build
       run: |
-        cd ${{inputs.docs_folder}}
+        cd ${{ inputs.docs_folder }}
         python -m sphinx -T -E -b html . _build/html
         cd ../../
     - name: publish
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ${{inputs.docs_folder}}/_build/html/
+        publish_dir: ${{ inputs.docs_folder }}/_build/html/

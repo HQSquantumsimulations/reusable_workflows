@@ -71,16 +71,16 @@ jobs:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
         run: |
-          pip install ${{inputs.python_folder}}/[tests]
+          pip install ${{ inputs.python_folder }}/[tests]
       - name: Test with coverage pytest
-        if: ${{inputs.test_code_coverage}}
+        if: ${{ inputs.test_code_coverage }}
         run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
+          cd ${{ inputs.python_folder }}
+          pytest tests/ --cov=${{ inputs.python_folder }} --cov-fail-under=80
       - name: Test without coverage pytest
-        if: ${{!inputs.test_code_coverage}}
+        if: ${{ !inputs.test_code_coverage }}
         run: |
-          cd ${{inputs.python_folder}}
+          cd ${{ inputs.python_folder }}
           pytest tests/
 
   test_python_linux_py3_13:
@@ -95,16 +95,16 @@ jobs:
       - name: Install dependencies
         run: |
           pip install setuptools
-          pip install ${{inputs.python_folder}}/[tests]
+          pip install ${{ inputs.python_folder }}/[tests]
       - name: Test with coverage pytest
-        if: ${{inputs.test_code_coverage}}
+        if: ${{ inputs.test_code_coverage }}
         run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
+          cd ${{ inputs.python_folder }}
+          pytest tests/ --cov=${{ inputs.python_folder }} --cov-fail-under=80
       - name: Test without coverage pytest
-        if: ${{!inputs.test_code_coverage}}
+        if: ${{ !inputs.test_code_coverage }}
         run: |
-          cd ${{inputs.python_folder}}
+          cd ${{ inputs.python_folder }}
           pytest tests/
 
   test_python_windows:
@@ -117,7 +117,7 @@ jobs:
             { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
-            {py: '3.12', interpreter: "python3.12"},
+            { py: '3.12', interpreter: "python3.12" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -126,16 +126,16 @@ jobs:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
         run: |
-          pip install ${{inputs.python_folder}}/[tests]
+          pip install ${{ inputs.python_folder }}/[tests]
       - name: Test with coverage pytest
-        if: ${{inputs.test_code_coverage}}
+        if: ${{ inputs.test_code_coverage }}
         run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
+          cd ${{ inputs.python_folder }}
+          pytest tests/ --cov=${{ inputs.python_folder }} --cov-fail-under=80
       - name: Test without coverage pytest
-        if: ${{!inputs.test_code_coverage}}
+        if: ${{ !inputs.test_code_coverage }}
         run: |
-          cd ${{inputs.python_folder}}
+          cd ${{ inputs.python_folder }}
           pytest tests/
 
   test_python_windows_py3_13:
@@ -150,16 +150,16 @@ jobs:
       - name: Install dependencies
         run: |
           pip install setuptools
-          pip install ${{inputs.python_folder}}/[tests]
+          pip install ${{ inputs.python_folder }}/[tests]
       - name: Test with coverage pytest
-        if: ${{inputs.test_code_coverage}}
+        if: ${{ inputs.test_code_coverage }}
         run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
+          cd ${{ inputs.python_folder }}
+          pytest tests/ --cov=${{ inputs.python_folder }} --cov-fail-under=80
       - name: Test without coverage pytest
-        if: ${{!inputs.test_code_coverage}}
+        if: ${{ !inputs.test_code_coverage }}
         run: |
-          cd ${{inputs.python_folder}}
+          cd ${{ inputs.python_folder }}
           pytest tests/
 
   test_python_macos:
@@ -172,7 +172,7 @@ jobs:
             { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
-            {py: '3.12', interpreter: "python3.12"},
+            { py: '3.12', interpreter: "python3.12" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -181,16 +181,16 @@ jobs:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
         run: |
-          pip install ${{inputs.python_folder}}/[tests]
+          pip install ${{ inputs.python_folder }}/[tests]
       - name: Test with coverage pytest
-        if: ${{inputs.test_code_coverage}}
+        if: ${{ inputs.test_code_coverage }}
         run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
+          cd ${{ inputs.python_folder }}
+          pytest tests/ --cov=${{ inputs.python_folder }} --cov-fail-under=80
       - name: Test without coverage pytest
-        if: ${{!inputs.test_code_coverage}}
+        if: ${{ !inputs.test_code_coverage }}
         run: |
-          cd ${{inputs.python_folder}}
+          cd ${{ inputs.python_folder }}
           pytest tests/
   
   test_python_macos_py3_13:
@@ -205,14 +205,14 @@ jobs:
       - name: Install dependencies
         run: |
           pip install setuptools
-          pip install ${{inputs.python_folder}}/[tests]
+          pip install ${{ inputs.python_folder }}/[tests]
       - name: Test with coverage pytest
-        if: ${{inputs.test_code_coverage}}
+        if: ${{ inputs.test_code_coverage }}
         run: |
-          cd ${{inputs.python_folder}}
-          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
+          cd ${{ inputs.python_folder }}
+          pytest tests/ --cov=${{ inputs.python_folder }} --cov-fail-under=80
       - name: Test without coverage pytest
-        if: ${{!inputs.test_code_coverage}}
+        if: ${{ !inputs.test_code_coverage }}
         run: |
-          cd ${{inputs.python_folder}}
+          cd ${{ inputs.python_folder }}
           pytest tests/
