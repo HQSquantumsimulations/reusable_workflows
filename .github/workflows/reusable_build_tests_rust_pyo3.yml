@@ -61,10 +61,10 @@ jobs:
     strategy:
       matrix:
         python: [
-            {py: '3.9', interpreter: "python3.9"},
-            {py: '3.10', interpreter: "python3.10"},
-            {py: '3.11', interpreter: "python3.11"},
-            {py: '3.12', interpreter: "python3.12"},
+            { py: '3.9', interpreter: "python3.9" },
+            { py: '3.10', interpreter: "python3.10" },
+            { py: '3.11', interpreter: "python3.11" },
+            { py: '3.12', interpreter: "python3.12" },
         ]
     steps:
       - uses: actions/checkout@v4
@@ -80,11 +80,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install maturin pytest numpy
-          pip install ${{inputs.py_interface_folder}}/
+          pip install ${{ inputs.py_interface_folder }}/
       - name: test
-        if: ${{inputs.has_python_tests}}
+        if: ${{ inputs.has_python_tests }}
         run: |
-          pytest ${{inputs.py_interface_folder}}/python_tests
+          pytest ${{ inputs.py_interface_folder }}/python_tests
   
   test_maturin_builds_linux_py313:
     if: ${{ inputs.python_3_13 }}
@@ -104,11 +104,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install maturin pytest numpy setuptools
-          pip install ${{inputs.py_interface_folder}}/
+          pip install ${{ inputs.py_interface_folder }}/
       - name: test
-        if: ${{inputs.has_python_tests}}
+        if: ${{ inputs.has_python_tests }}
         run: |
-          pytest ${{inputs.py_interface_folder}}/python_tests
+          pytest ${{ inputs.py_interface_folder }}/python_tests
 
   test_maturin_builds_windows:
     name: maturin_check_windows-${{ matrix.python.interpreter }}
@@ -117,10 +117,10 @@ jobs:
     strategy:
       matrix:
         python: [
-            {py: '3.9', interpreter: "python3.9"},
-            {py: '3.10', interpreter: "python3.10"},
-            {py: '3.11', interpreter: "python3.11"},
-            {py: '3.12', interpreter: "python3.12"},
+            { py: '3.9', interpreter: "python3.9" },
+            { py: '3.10', interpreter: "python3.10" },
+            { py: '3.11', interpreter: "python3.11" },
+            { py: '3.12', interpreter: "python3.12" },
         ]
     steps:
       - uses: actions/checkout@v4
@@ -136,11 +136,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install maturin pytest numpy
-          pip install ${{inputs.py_interface_folder}}/
+          pip install ${{ inputs.py_interface_folder }}/
       - name: test
-        if: ${{inputs.has_python_tests}}
+        if: ${{ inputs.has_python_tests }}
         run: |
-          pytest ${{inputs.py_interface_folder}}/python_tests
+          pytest ${{ inputs.py_interface_folder }}/python_tests
   
   test_maturin_builds_windows_py313:
     name: maturin_check_windows-python3.13
@@ -160,11 +160,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install maturin pytest numpy setuptools
-          pip install ${{inputs.py_interface_folder}}/
+          pip install ${{ inputs.py_interface_folder }}/
       - name: test
-        if: ${{inputs.has_python_tests}}
+        if: ${{ inputs.has_python_tests }}
         run: |
-          pytest ${{inputs.py_interface_folder}}/python_tests
+          pytest ${{ inputs.py_interface_folder }}/python_tests
 
   test_maturin_builds_macos:
     name: maturin_check_macos-${{ matrix.python.interpreter }}
@@ -173,10 +173,10 @@ jobs:
     strategy:
       matrix:
         python: [
-            {py: '3.9', interpreter: "python3.9"},
-            {py: '3.10', interpreter: "python3.10"},
-            {py: '3.11', interpreter: "python3.11"},
-            {py: '3.12', interpreter: "python3.12"},
+            { py: '3.9', interpreter: "python3.9" },
+            { py: '3.10', interpreter: "python3.10" },
+            { py: '3.11', interpreter: "python3.11" },
+            { py: '3.12', interpreter: "python3.12" },
         ]
     steps:
       - uses: actions/checkout@v3
@@ -193,11 +193,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install maturin pytest numpy
-          python -m pip install ${{inputs.py_interface_folder}}/
+          python -m pip install ${{ inputs.py_interface_folder }}/
       - name: test
-        if: ${{inputs.has_python_tests}}
+        if: ${{ inputs.has_python_tests }}
         run: |
-          pytest ${{inputs.py_interface_folder}}/python_tests
+          pytest ${{ inputs.py_interface_folder }}/python_tests
   
   test_maturin_builds_macos_py313:
     name: maturin_check_macos-python3.13
@@ -218,8 +218,8 @@ jobs:
       - name: Install dependencies
         run: |
           pip install maturin pytest numpy setuptools
-          pip install ${{inputs.py_interface_folder}}/
+          pip install ${{ inputs.py_interface_folder }}/
       - name: test
-        if: ${{inputs.has_python_tests}}
+        if: ${{ inputs.has_python_tests }}
         run: |
-          pytest ${{inputs.py_interface_folder}}/python_tests
+          pytest ${{ inputs.py_interface_folder }}/python_tests

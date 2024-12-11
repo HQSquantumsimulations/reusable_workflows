@@ -15,7 +15,6 @@ on:
         type: string
 
 jobs:
-
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -33,6 +32,6 @@ jobs:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
       run: |
-        cd ${{inputs.python_folder}}
+        cd ${{ inputs.python_folder }}
         python -m build
         twine upload --skip-existing dist/*

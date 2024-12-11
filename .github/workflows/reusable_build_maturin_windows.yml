@@ -51,7 +51,7 @@ jobs:
         with:
           maturin-version: latest
           command: build
-          args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked -i python3.9 python3.10 python3.11 python3.12
+          args: --out wheels -m ${{ inputs.py_interface_folder }}/Cargo.toml --release --locked -i python3.9 python3.10 python3.11 python3.12
       - name: store artifact
         uses: actions/upload-artifact@v4
         with:
@@ -75,7 +75,7 @@ jobs:
         with:
           maturin-version: latest
           command: build
-          args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked -i python3.13
+          args: --out wheels -m ${{ inputs.py_interface_folder }}/Cargo.toml --release --locked -i python3.13
       - name: store artifact
         uses: actions/upload-artifact@v4
         with:
@@ -83,7 +83,7 @@ jobs:
           path: wheels
 
   deploy:
-    if: ${{inputs.deploy}}
+    if: ${{ inputs.deploy }}
     needs: build_maturin_builds_windows
     runs-on: ubuntu-latest
     steps:
