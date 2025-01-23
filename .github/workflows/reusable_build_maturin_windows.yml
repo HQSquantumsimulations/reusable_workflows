@@ -70,6 +70,10 @@ jobs:
           profile: minimal
           toolchain: stable
           default: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          architecture: 'windows-latest'
       - name: windows wheels
         uses: PyO3/maturin-action@v1
         with:
