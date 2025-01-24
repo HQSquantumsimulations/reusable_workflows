@@ -61,7 +61,7 @@ jobs:
   build_maturin_builds_windows_py313:
     if: ${{ inputs.python_3_13 }}
     name: maturin_build-windows-py313
-    runs-on: 'windows-latest'
+    runs-on: 'windows-2025'
     steps:
       - uses: actions/checkout@v4
       # - uses: Swatinem/rust-cache@v2
