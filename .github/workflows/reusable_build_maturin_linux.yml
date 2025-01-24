@@ -102,7 +102,7 @@ jobs:
 
   build_maturin_builds_linux_arm:
     name: maturin_build-linux-arm
-    if: ${{inputs.build_for_arm}}
+    if: ${{ inputs.build_for_arm }}
     runs-on: 'ubuntu-latest'
     steps:
       - uses: actions/checkout@v4
@@ -133,7 +133,7 @@ jobs:
   
   build_maturin_builds_linux_arm_py313:
     name: maturin_build-linux-arm-py313
-    if: ${{inputs.build_for_arm && inputs.python_3_13}}
+    if: ${{ inputs.build_for_arm && inputs.python_3_13 }}
     runs-on: 'ubuntu-latest'
     steps:
       - uses: actions/checkout@v4
@@ -189,7 +189,7 @@ jobs:
           path: wheels
 
   deploy:
-    if: ${{inputs.deploy}}
+    if: ${{ inputs.deploy }}
     needs: [build_maturin_src_builds_linux, build_maturin_builds_linux]
     runs-on: ubuntu-latest
     steps:
@@ -199,11 +199,8 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         path: wheels
-        pattern: linux_wheels_p*
+        pattern: linux_*
         merge-multiple: true  
-    - uses: actions/download-artifact@v4
-      with:
-        name: linux_sdist
     - name: Publish
       env:
         TWINE_USERNAME: __token__
@@ -214,7 +211,7 @@ jobs:
         python -m twine upload --skip-existing wheels/*
 
   deploy-arm:
-    if: ${{inputs.deploy && inputs.build_for_arm}}
+    if: ${{ inputs.deploy && inputs.build_for_arm }}
     needs: [build_maturin_builds_linux_arm]
     runs-on: ubuntu-latest
     steps:
@@ -234,6 +231,3 @@ jobs:
         python -m pip install --upgrade pip
         pip install twine
         python -m twine upload --skip-existing wheels/*
-
-  
-

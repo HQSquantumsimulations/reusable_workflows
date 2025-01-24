@@ -23,7 +23,6 @@ on:
         type: string
 
 jobs:
-
   test_python_linting_linux:
     name: python_check_linting_linux
     runs-on: "ubuntu-latest"
@@ -34,16 +33,16 @@ jobs:
           python-version: "3.11"
       - name: Install dependencies
         run: |
-          pip install ${{inputs.python_folder}}/[dev]
+          pip install ${{ inputs.python_folder }}/[dev]
       - name: Lint with ruff
         run: |
-          cd ${{inputs.python_folder}}/
-          ruff check ${{inputs.linting_folder}}
+          cd ${{ inputs.python_folder }}/
+          ruff check ${{ inputs.linting_folder }}
       - name: Mypy check
         run: |
-          cd ${{inputs.python_folder}}/
-          mypy ${{inputs.linting_folder}}
+          cd ${{ inputs.python_folder }}/
+          mypy ${{ inputs.linting_folder }}
       - name: Black formatting check
         run: |
-          cd ${{inputs.python_folder}}/
-          black --check ${{inputs.linting_folder}}
+          cd ${{ inputs.python_folder }}/
+          black --check ${{ inputs.linting_folder }}
