@@ -73,7 +73,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-          architecture: 'windows-2025'
       - name: windows wheels
         uses: PyO3/maturin-action@v1
         with:
