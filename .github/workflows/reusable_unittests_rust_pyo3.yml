@@ -220,10 +220,10 @@ jobs:
           target: x86_64-unknown-linux-gnu
           default: true
       - run: |
-          cargo test --doc --package=${{inputs.rust_package_name}} --features "${{ inputs.features || '' }}"
+          cargo test --doc --package=${{ inputs.rust_package_name }} --features "${{ inputs.features || '' }}"
 
   code_coverage_roqoqo:
-    if: ${{inputs.test_code_coverage}}
+    if: ${{ inputs.test_code_coverage }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -236,5 +236,5 @@ jobs:
           override: true
       - uses: taiki-e/install-action@cargo-llvm-cov
       - run: |
-          cd ${{inputs.rust_package_name}}
+          cd ${{ inputs.rust_package_name }}
           cargo llvm-cov --no-default-features --lcov --output-path lcov_roqoqo.info --fail-under-lines=90

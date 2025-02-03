@@ -52,10 +52,10 @@ jobs:
     strategy:
       matrix:
         python: [
-            {py: '3.9', interpreter: "python3.9"},
-            {py: '3.10', interpreter: "python3.10"},
-            {py: '3.11', interpreter: "python3.11"},
-            {py: '3.12', interpreter: "python3.12"},
+            { py: '3.9', interpreter: "python3.9" },
+            { py: '3.10', interpreter: "python3.10" },
+            { py: '3.11', interpreter: "python3.11" },
+            { py: '3.12', interpreter: "python3.12" },
         ]
     steps:
       - uses: actions/checkout@v4
@@ -77,7 +77,7 @@ jobs:
         run: |
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i ${{ matrix.python.interpreter }} --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
       - name: universal wheels
-        if: ${{ inputs.universal2}}
+        if: ${{ inputs.universal2 }}
         run: |
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i ${{ matrix.python.interpreter }} --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked --target x86_64-apple-darwin
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i ${{ matrix.python.interpreter }} --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked --target aarch64-apple-darwin
@@ -109,12 +109,12 @@ jobs:
       - name: macos wheels
         if: ${{ inputs.universal2 == false }}
         run: |
-          RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i "python3.13" --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
+          RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i "python3.13" --out wheels  -m ${{ inputs.py_interface_folder }}/Cargo.toml --release --locked
       - name: universal wheels
-        if: ${{ inputs.universal2}}
+        if: ${{ inputs.universal2 }}
         run: |
-          RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i "python3.13" --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked --target x86_64-apple-darwin
-          RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i "python3.13" --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked --target aarch64-apple-darwin
+          RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i "python3.13" --out wheels  -m ${{ inputs.py_interface_folder }}/Cargo.toml --release --locked --target x86_64-apple-darwin
+          RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" maturin build -i "python3.13" --out wheels  -m ${{ inputs.py_interface_folder }}/Cargo.toml --release --locked --target aarch64-apple-darwin
       - name: store artifact
         uses: actions/upload-artifact@v4
         with:
@@ -122,7 +122,7 @@ jobs:
           path: wheels
 
   deploy:
-    if: ${{inputs.deploy}}
+    if: ${{ inputs.deploy }}
     needs: build_maturin_builds_macos
     runs-on: ubuntu-latest
     steps:
@@ -142,4 +142,3 @@ jobs:
         python -m pip install --upgrade pip
         pip install twine
         python -m twine upload --skip-existing wheels/*
-
