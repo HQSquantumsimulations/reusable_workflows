@@ -179,7 +179,7 @@ jobs:
             { py: '3.12', interpreter: "python3.12" },
         ]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       # - uses: Swatinem/rust-cache@v2.0.0
       - uses: actions-rs/toolchain@v1
         with:
@@ -187,7 +187,7 @@ jobs:
           toolchain: stable
           target: "aarch64-apple-darwin"
           default: true
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
