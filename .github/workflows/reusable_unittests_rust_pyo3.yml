@@ -22,6 +22,10 @@ on:
         description: "Name of the pure rust package"
         required: true
         type: string
+      rust_doc_package_name:
+        description: "Name of the pure rust package to doctest"
+        required: false
+        type: string
       python_3_13:
         description: "Run unittest on Python 3.13"
         required: false
@@ -223,7 +227,13 @@ jobs:
           toolchain: stable
           target: x86_64-unknown-linux-gnu
           default: true
-      - run: |
+      - name: Test with coverage pytest
+        if: ${{ inputs.rust_doc_package_name }}
+        run: |
+          cargo test --doc --package=${{ inputs.rust_doc_package_name }} --features "${{ inputs.features || '' }}"
+      - name: Test without coverage pytest
+        if: ${{ !inputs.rust_doc_package_name }}
+        run: |
           cargo test --doc --package=${{ inputs.rust_package_name }} --features "${{ inputs.features || '' }}"
 
   code_coverage_roqoqo:
