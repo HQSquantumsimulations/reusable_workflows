@@ -56,6 +56,10 @@ on:
         description: "Name of the pure rust package"
         required: true
         type: string
+      rust_doc_package_name:
+        description: "Name of the pure rust package to doctest"
+        required: false
+        type: string
       python_3_13:
         description: "Run unittest on Python 3.13"
         required: false
