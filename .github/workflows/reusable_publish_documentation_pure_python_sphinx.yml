@@ -29,17 +29,17 @@ jobs:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v4
       with:
-        python-version: '3.11'
+        python-version: '3.12'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip maturin
         pip install ${{ inputs.python_folder }}/[docs]
-    - name: build
+    - name: Build Documentation
       run: |
         cd ${{ inputs.docs_folder }}
         python -m sphinx -T -E -b html . _build/html
         cd ../../
-    - name: publish
+    - name: Publish
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
