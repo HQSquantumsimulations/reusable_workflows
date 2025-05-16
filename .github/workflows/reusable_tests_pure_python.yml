@@ -72,19 +72,19 @@ jobs:
       - name: Install dependencies
         run: |
           pip install ${{ inputs.python_folder }}/[tests]
-      - name: Test with coverage pytest
+      - name: Test with Coverage pytest
         if: ${{ inputs.test_code_coverage }}
         run: |
           cd ${{ inputs.python_folder }}
           pytest tests/ --cov=${{ inputs.python_folder }} --cov-fail-under=80
-      - name: Test without coverage pytest
+      - name: Test without Coverage pytest
         if: ${{ !inputs.test_code_coverage }}
         run: |
           cd ${{ inputs.python_folder }}
           pytest tests/
 
-  test_python_linux_py3_13:
-    name: test_python_linux-python3.13
+  test_python_linux_py313:
+    name: test_python_linux_py313
     if: ${{ inputs.python_3_13 }}
     runs-on: "ubuntu-latest"
     steps:
@@ -96,12 +96,12 @@ jobs:
         run: |
           pip install setuptools
           pip install ${{ inputs.python_folder }}/[tests]
-      - name: Test with coverage pytest
+      - name: Test with Coverage pytest
         if: ${{ inputs.test_code_coverage }}
         run: |
           cd ${{ inputs.python_folder }}
           pytest tests/ --cov=${{ inputs.python_folder }} --cov-fail-under=80
-      - name: Test without coverage pytest
+      - name: Test without Coverage pytest
         if: ${{ !inputs.test_code_coverage }}
         run: |
           cd ${{ inputs.python_folder }}
@@ -109,7 +109,7 @@ jobs:
 
   test_python_windows:
     if: ${{ inputs.windows }}
-    name: test_python_windows-${{ matrix.python.interpreter }}
+    name: test_python_windows_${{ matrix.python.interpreter }}
     runs-on: "windows-latest"
     strategy:
       matrix:
@@ -127,20 +127,20 @@ jobs:
       - name: Install dependencies
         run: |
           pip install ${{ inputs.python_folder }}/[tests]
-      - name: Test with coverage pytest
+      - name: Test with Coverage pytest
         if: ${{ inputs.test_code_coverage }}
         run: |
           cd ${{ inputs.python_folder }}
           pytest tests/ --cov=${{ inputs.python_folder }} --cov-fail-under=80
-      - name: Test without coverage pytest
+      - name: Test without Coverage pytest
         if: ${{ !inputs.test_code_coverage }}
         run: |
           cd ${{ inputs.python_folder }}
           pytest tests/
 
-  test_python_windows_py3_13:
+  test_python_windows_py313:
     if: ${{ inputs.windows && inputs.python_3_13 }}
-    name: test_python_windows-python3.13
+    name: test_python_windows_py313
     runs-on: "windows-latest"
     steps:
       - uses: actions/checkout@v3
@@ -151,12 +151,12 @@ jobs:
         run: |
           pip install setuptools
           pip install ${{ inputs.python_folder }}/[tests]
-      - name: Test with coverage pytest
+      - name: Test with Coverage pytest
         if: ${{ inputs.test_code_coverage }}
         run: |
           cd ${{ inputs.python_folder }}
           pytest tests/ --cov=${{ inputs.python_folder }} --cov-fail-under=80
-      - name: Test without coverage pytest
+      - name: Test without Coverage pytest
         if: ${{ !inputs.test_code_coverage }}
         run: |
           cd ${{ inputs.python_folder }}
@@ -164,7 +164,7 @@ jobs:
 
   test_python_macos:
     if: ${{ inputs.macos }}
-    name: test_python_macos-${{ matrix.python.interpreter }}
+    name: test_python_macos_${{ matrix.python.interpreter }}
     runs-on: "macOS-13"
     strategy:
       matrix:
@@ -182,12 +182,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install ${{ inputs.python_folder }}/[tests]
-      - name: Test with coverage pytest
+      - name: Test with Coverage pytest
         if: ${{ inputs.test_code_coverage }}
         run: |
           cd ${{ inputs.python_folder }}
           pytest tests/ --cov=${{ inputs.python_folder }} --cov-fail-under=80
-      - name: Test without coverage pytest
+      - name: Test without Coverage pytest
         if: ${{ !inputs.test_code_coverage }}
         run: |
           cd ${{ inputs.python_folder }}
@@ -195,7 +195,7 @@ jobs:
   
   test_python_macos_py3_13:
     if: ${{ inputs.macos && inputs.python_3_13 }}
-    name: test_python_macos-python3.13
+    name: test_python_macos_py313
     runs-on: "macOS-13"
     steps:
       - uses: actions/checkout@v3
@@ -206,12 +206,12 @@ jobs:
         run: |
           pip install setuptools
           pip install ${{ inputs.python_folder }}/[tests]
-      - name: Test with coverage pytest
+      - name: Test with Coverage pytest
         if: ${{ inputs.test_code_coverage }}
         run: |
           cd ${{ inputs.python_folder }}
           pytest tests/ --cov=${{ inputs.python_folder }} --cov-fail-under=80
-      - name: Test without coverage pytest
+      - name: Test without Coverage pytest
         if: ${{ !inputs.test_code_coverage }}
         run: |
           cd ${{ inputs.python_folder }}

@@ -77,7 +77,7 @@ on:
 jobs:
   unittests_check_windows:
     if: ${{ inputs.windows }}
-    name: unittests-windows-${{ matrix.python.interpreter }}
+    name: unittests_check_windows_${{ matrix.python.interpreter }}
     runs-on: "windows-latest"
     strategy:
       matrix:
@@ -90,12 +90,9 @@ jobs:
           ]
     steps:
       - uses: actions/checkout@v4
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          profile: minimal
           toolchain: stable
-          default: true
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python.py }}
@@ -103,18 +100,15 @@ jobs:
           python -m pip install ${{ inputs.pip_install || 'numpy' }}
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
 
-  unittests_check_windows_py3_13:
+  unittests_check_windows_py313:
     if: ${{ inputs.windows && inputs.python_3_13 }}
-    name: unittests-windows-python3.13
+    name: unittests_check_windows_py313
     runs-on: "windows-latest"
     steps:
       - uses: actions/checkout@v3
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          profile: minimal
           toolchain: stable
-          default: true
       - uses: actions/setup-python@v4
         with:
           python-version: "3.13"
@@ -124,7 +118,7 @@ jobs:
 
   unittests_check_macos:
     if: ${{ inputs.macos }}
-    name: unittests-macos-${{ matrix.python.interpreter }}
+    name: unittests_check_macos_${{ matrix.python.interpreter }}
     runs-on: "macOS-13"
     strategy:
       matrix:
@@ -137,12 +131,9 @@ jobs:
           ]
     steps:
       - uses: actions/checkout@v4
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          profile: minimal
           toolchain: stable
-          default: true
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python.py }}
@@ -150,18 +141,15 @@ jobs:
           python -m pip install ${{ inputs.pip_install || 'numpy' }}
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
 
-  unittests_check_macos_py3_13:
+  unittests_check_macos_py313:
     if: ${{ inputs.macos && inputs.python_3_13 }}
-    name: unittests-macos-python3.13
+    name: unittests_check_macos_py313
     runs-on: "macOS-13"
     steps:
       - uses: actions/checkout@v3
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          profile: minimal
           toolchain: stable
-          default: true
       - uses: actions/setup-python@v4
         with:
           python-version: "3.13"
@@ -170,7 +158,7 @@ jobs:
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
 
   unittests_check_linux:
-    name: unittests-linux-${{ matrix.python.interpreter }}
+    name: unittests_check_linux_${{ matrix.python.interpreter }}
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
@@ -183,12 +171,9 @@ jobs:
           ]
     steps:
       - uses: actions/checkout@v4
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          profile: minimal
           toolchain: stable
-          default: true
           components: rustfmt
       - uses: actions/setup-python@v4
         with:
@@ -198,18 +183,15 @@ jobs:
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
           cargo fmt --all -- --check
 
-  unittests_check_linux_py3_13:
+  unittests_check_linux_py313:
     if: ${{ inputs.python_3_13 }}
-    name: unittests-linux-python3.13
+    name: unittests_check_linux_py313
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v3
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          profile: minimal
           toolchain: stable
-          default: true
           components: rustfmt
       - uses: actions/setup-python@v4
         with:
@@ -219,23 +201,20 @@ jobs:
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
           cargo fmt --all -- --check
 
-  doctest_check:
-    name: unittests_check-ubuntu-latest
+  check_doctest:
+    name: check_doctest
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          profile: minimal
           toolchain: stable
           target: x86_64-unknown-linux-gnu
-          default: true
-      - name: Test with coverage pytest
+      - name: Test with Coverage pytest
         if: ${{ inputs.rust_doc_package_name }}
         run: |
           cargo test --doc --package=${{ inputs.rust_doc_package_name }} --features "${{ inputs.features || '' }}"
-      - name: Test without coverage pytest
+      - name: Test without Coverage pytest
         if: ${{ !inputs.rust_doc_package_name }}
         run: |
           cargo test --doc --package=${{ inputs.rust_package_name }} --features "${{ inputs.features || '' }}"
@@ -245,10 +224,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          profile: minimal
           toolchain: stable
           components: llvm-tools-preview
           override: true
