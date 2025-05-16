@@ -56,7 +56,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Build Linux Wheels (py3.9-3.13)
+      - name: Build Linux Wheels (py3.9-3.12)
         uses: PyO3/maturin-action@v1
         with:
           maturin-version: latest
@@ -106,7 +106,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Build Linux Wheels (py3.9-3.13 arm)
+      - name: Build Linux Wheels (py3.9-3.12 arm)
         uses: PyO3/maturin-action@v1
         with:
           maturin-version: latest
