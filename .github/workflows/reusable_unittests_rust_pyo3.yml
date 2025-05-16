@@ -212,12 +212,10 @@ jobs:
           target: x86_64-unknown-linux-gnu
       - name: Test with Coverage pytest
         if: ${{ inputs.rust_doc_package_name }}
-        run: |
-          cargo test --doc --package=${{ inputs.rust_doc_package_name }} --features "${{ inputs.features || '' }}"
+        run: cargo test --doc --package=${{ inputs.rust_doc_package_name }} --features "${{ inputs.features || '' }}"
       - name: Test without Coverage pytest
         if: ${{ !inputs.rust_doc_package_name }}
-        run: |
-          cargo test --doc --package=${{ inputs.rust_package_name }} --features "${{ inputs.features || '' }}"
+        run: cargo test --doc --package=${{ inputs.rust_package_name }} --features "${{ inputs.features || '' }}"
 
   code_coverage_roqoqo:
     if: ${{ inputs.test_code_coverage }}

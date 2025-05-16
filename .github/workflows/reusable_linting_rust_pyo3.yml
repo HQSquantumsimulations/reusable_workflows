@@ -13,8 +13,7 @@ jobs:
         with:
           toolchain: stable
           components: clippy
-      - run: |
-          cargo clippy -- -D warnings
+      - run: cargo clippy -- -D warnings
 
   cargo_deny:
     runs-on: ubuntu-latest

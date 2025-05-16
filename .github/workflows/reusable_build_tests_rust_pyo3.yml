@@ -75,15 +75,12 @@ jobs:
         with:
           python-version: ${{ matrix.python.py }}
       - name: Install Dependencies
-        run: |
-          pip install maturin pytest numpy
+        run: pip install maturin pytest numpy
       - name: Build Test
-        run: |
-          pip install ${{ inputs.py_interface_folder }}/
+        run: pip install ${{ inputs.py_interface_folder }}/
       - name: Test pytest
         if: ${{ inputs.has_python_tests }}
-        run: |
-          pytest ${{ inputs.py_interface_folder }}/python_tests
+        run: pytest ${{ inputs.py_interface_folder }}/python_tests
   
   build_test_linux_py313:
     if: ${{ inputs.python_3_13 }}
@@ -98,15 +95,12 @@ jobs:
         with:
           python-version: '3.13'
       - name: Install Dependencies
-        run: |
-          pip install maturin pytest numpy setuptools
+        run: pip install maturin pytest numpy setuptools
       - name: Build Test
-        run: |
-          pip install ${{ inputs.py_interface_folder }}/
+        run: pip install ${{ inputs.py_interface_folder }}/
       - name: Test pytest
         if: ${{ inputs.has_python_tests }}
-        run: |
-          pytest ${{ inputs.py_interface_folder }}/python_tests
+        run: pytest ${{ inputs.py_interface_folder }}/python_tests
 
   build_test_windows:
     name: build_test_windows_${{ matrix.python.interpreter }}
@@ -129,15 +123,12 @@ jobs:
         with:
           python-version: '${{ matrix.python.py }}'
       - name: Install Dependencies
-        run: |
-          pip install maturin pytest numpy
+        run: pip install maturin pytest numpy
       - name: Build Test
-        run: |
-          pip install ${{ inputs.py_interface_folder }}/
+        run: pip install ${{ inputs.py_interface_folder }}/
       - name: Test pytest
         if: ${{ inputs.has_python_tests }}
-        run: |
-          pytest ${{ inputs.py_interface_folder }}/python_tests
+        run: pytest ${{ inputs.py_interface_folder }}/python_tests
   
   build_test_windows_py313:
     name: build_test_windows_py313
@@ -152,15 +143,12 @@ jobs:
         with:
           python-version: '3.13'
       - name: Install Dependencies
-        run: |
-          pip install maturin pytest numpy setuptools
+        run: pip install maturin pytest numpy setuptools
       - name: Build Test
-        run: |
-          pip install ${{ inputs.py_interface_folder }}/
+        run: pip install ${{ inputs.py_interface_folder }}/
       - name: Test pytest
         if: ${{ inputs.has_python_tests }}
-        run: |
-          pytest ${{ inputs.py_interface_folder }}/python_tests
+        run: pytest ${{ inputs.py_interface_folder }}/python_tests
 
   build_test_macos:
     name: build_test_macos${{ matrix.python.interpreter }}
@@ -184,15 +172,12 @@ jobs:
         with:
           python-version: ${{ matrix.python.py }}
       - name: Install Dependencies
-        run: |
-          python -m pip install maturin pytest numpy
+        run: python -m pip install maturin pytest numpy
       - name: Build Test
-        run: |
-          python -m pip install ${{ inputs.py_interface_folder }}/
+        run: python -m pip install ${{ inputs.py_interface_folder }}/
       - name: Test pytest
         if: ${{ inputs.has_python_tests }}
-        run: |
-          pytest ${{ inputs.py_interface_folder }}/python_tests
+        run: pytest ${{ inputs.py_interface_folder }}/python_tests
   
   build_test_macos_py313:
     name: build_test_macos_py313
@@ -208,12 +193,9 @@ jobs:
         with:
           python-version: '3.13'
       - name: Install Dependencies
-        run: |
-          pip install maturin pytest numpy setuptools
+        run: pip install maturin pytest numpy setuptools
       - name: Build Test
-        run: |
-          pip install ${{ inputs.py_interface_folder }}/
+        run: pip install ${{ inputs.py_interface_folder }}/
       - name: Test pytest
         if: ${{ inputs.has_python_tests }}
-        run: |
-          pytest ${{ inputs.py_interface_folder }}/python_tests
+        run: pytest ${{ inputs.py_interface_folder }}/python_tests

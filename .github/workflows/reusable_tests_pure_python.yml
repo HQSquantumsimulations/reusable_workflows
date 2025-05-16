@@ -70,8 +70,7 @@ jobs:
         with:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
-        run: |
-          pip install ${{ inputs.python_folder }}/[tests]
+        run: pip install ${{ inputs.python_folder }}/[tests]
       - name: Test with Coverage pytest
         if: ${{ inputs.test_code_coverage }}
         run: |
@@ -125,8 +124,7 @@ jobs:
         with:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
-        run: |
-          pip install ${{ inputs.python_folder }}/[tests]
+        run: pip install ${{ inputs.python_folder }}/[tests]
       - name: Test with Coverage pytest
         if: ${{ inputs.test_code_coverage }}
         run: |
@@ -180,8 +178,7 @@ jobs:
         with:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
-        run: |
-          pip install ${{ inputs.python_folder }}/[tests]
+        run: pip install ${{ inputs.python_folder }}/[tests]
       - name: Test with Coverage pytest
         if: ${{ inputs.test_code_coverage }}
         run: |

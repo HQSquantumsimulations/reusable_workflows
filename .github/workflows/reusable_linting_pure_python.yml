@@ -32,8 +32,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install Dependencies
-        run: |
-          pip install ${{ inputs.python_folder }}/[dev]
+        run: pip install ${{ inputs.python_folder }}/[dev]
       - name: Check - ruff
         run: |
           cd ${{ inputs.python_folder }}/
