@@ -191,7 +191,7 @@ jobs:
 
   deploy_arm:
     if: ${{ inputs.deploy && inputs.build_for_arm }}
-    needs: [maturin_build_linux_arm]
+    needs: maturin_build_linux_arm
     runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-python@v5
