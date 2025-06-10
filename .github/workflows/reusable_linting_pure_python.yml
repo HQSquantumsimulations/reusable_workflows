@@ -23,26 +23,25 @@ on:
         type: string
 
 jobs:
-  test_python_linting_linux:
-    name: python_check_linting_linux
+  check_python_linting:
+    name: check_python_linting
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - name: Install dependencies
-        run: |
-          pip install ${{ inputs.python_folder }}/[dev]
-      - name: Lint with ruff
+          python-version: "3.12"
+      - name: Install Dependencies
+        run: pip install ${{ inputs.python_folder }}/[dev]
+      - name: Check - ruff
         run: |
           cd ${{ inputs.python_folder }}/
           ruff check ${{ inputs.linting_folder }}
-      - name: Mypy check
+      - name: Check - mypy
         run: |
           cd ${{ inputs.python_folder }}/
           mypy ${{ inputs.linting_folder }}
-      - name: Black formatting check
+      - name: Check - black
         run: |
           cd ${{ inputs.python_folder }}/
           black --check ${{ inputs.linting_folder }}
