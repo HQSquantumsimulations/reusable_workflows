@@ -102,7 +102,7 @@ jobs:
 
   unittests_check_windows_py313:
     if: ${{ inputs.windows && inputs.python_3_13 }}
-    name: unittests_check_windows_py313
+    name: unittests_check_windows_python3.13
     runs-on: "windows-latest"
     steps:
       - uses: actions/checkout@v3
@@ -143,7 +143,7 @@ jobs:
 
   unittests_check_macos_py313:
     if: ${{ inputs.macos && inputs.python_3_13 }}
-    name: unittests_check_macos_py313
+    name: unittests_check_macos_python3.13
     runs-on: "macOS-13"
     steps:
       - uses: actions/checkout@v3
@@ -185,7 +185,7 @@ jobs:
 
   unittests_check_linux_py313:
     if: ${{ inputs.python_3_13 }}
-    name: unittests_check_linux_py313
+    name: unittests_check_linux_python3.13
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v3
