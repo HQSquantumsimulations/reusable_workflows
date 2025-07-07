@@ -154,6 +154,8 @@ jobs:
     name: build_test_macos_${{ matrix.python.interpreter }}
     if: ${{ inputs.macos }}
     runs-on: "macos-13"
+    env:
+      RUSTFLAGS: "-C link-arg=-undefined -C link-arg=dynamic_lookup"
     strategy:
       matrix:
         python: [
