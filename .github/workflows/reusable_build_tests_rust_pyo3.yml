@@ -154,8 +154,6 @@ jobs:
     name: build_test_macos_${{ matrix.python.interpreter }}
     if: ${{ inputs.macos }}
     runs-on: "macos-13"
-    env:
-      RUSTFLAGS: "-C link-arg=-undefined -C link-arg=dynamic_lookup"
     strategy:
       matrix:
         python: [
@@ -176,7 +174,7 @@ jobs:
       - name: Install Dependencies
         run: pip install maturin pytest numpy
       - name: Build Test
-        run: pip install ${{ inputs.py_interface_folder }}/
+        run: RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup"pip install ${{ inputs.py_interface_folder }}/
       - name: Test pytest
         if: ${{ inputs.has_python_tests }}
         run: pytest ${{ inputs.py_interface_folder }}/python_tests
@@ -185,8 +183,6 @@ jobs:
     name: build_test_macos_python3.13
     if: ${{ inputs.macos && inputs.python_3_13 }}
     runs-on: "macos-13"
-    env:
-      RUSTFLAGS: "-C link-arg=-undefined -C link-arg=dynamic_lookup"
     steps:
       - uses: actions/checkout@v3
       - uses: actions-rust-lang/setup-rust-toolchain@v1
@@ -197,9 +193,9 @@ jobs:
         with:
           python-version: '3.13'
       - name: Install Dependencies
-        run: pip install maturin pytest numpy setuptools
+        run: pip install maturin pytest numpy
       - name: Build Test
-        run: pip install ${{ inputs.py_interface_folder }}/
+        run: RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" pip install ${{ inputs.py_interface_folder }}/
       - name: Test pytest
         if: ${{ inputs.has_python_tests }}
         run: pytest ${{ inputs.py_interface_folder }}/python_tests
