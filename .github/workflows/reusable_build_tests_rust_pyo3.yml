@@ -174,9 +174,9 @@ jobs:
         with:
           python-version: ${{ matrix.python.py }}
       - name: Install Dependencies
-        run: python -m pip install maturin pytest numpy
+        run: pip install maturin pytest numpy
       - name: Build Test
-        run: python -m pip install ${{ inputs.py_interface_folder }}/
+        run: pip install ${{ inputs.py_interface_folder }}/
       - name: Test pytest
         if: ${{ inputs.has_python_tests }}
         run: pytest ${{ inputs.py_interface_folder }}/python_tests
@@ -197,9 +197,9 @@ jobs:
         with:
           python-version: '3.13'
       - name: Install Dependencies
-        run: python -m pip install maturin pytest numpy setuptools
+        run: pip install maturin pytest numpy setuptools
       - name: Build Test
-        run: python -m pip install ${{ inputs.py_interface_folder }}/
+        run: pip install ${{ inputs.py_interface_folder }}/
       - name: Test pytest
         if: ${{ inputs.has_python_tests }}
         run: pytest ${{ inputs.py_interface_folder }}/python_tests
