@@ -174,7 +174,7 @@ jobs:
       - name: Install Dependencies
         run: pip install maturin pytest numpy
       - name: Build Test
-        run: RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup"pip install ${{ inputs.py_interface_folder }}/
+        run: RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" pip install ${{ inputs.py_interface_folder }}/
       - name: Test pytest
         if: ${{ inputs.has_python_tests }}
         run: pytest ${{ inputs.py_interface_folder }}/python_tests
