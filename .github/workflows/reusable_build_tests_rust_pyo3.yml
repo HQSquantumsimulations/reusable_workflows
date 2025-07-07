@@ -173,12 +173,11 @@ jobs:
           python-version: ${{ matrix.python.py }}
       - name: Install Dependencies
         run: |
-          export PYO3_CONFIG_FILE=""
           export PYO3_PYTHON=$(which python3)
           python -m pip install maturin pytest numpy
       - name: Build Test
         run: |
-          export PYO3_CONFIG_FILE=""
+          unset PYO3_CONFIG_FILE
           export PYO3_PYTHON=$(which python3)
           python -m pip install ${{ inputs.py_interface_folder }}/
       - name: Test pytest
