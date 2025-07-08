@@ -139,7 +139,7 @@ jobs:
           python-version: ${{ matrix.python.py }}
       - run: |
           python -m pip install ${{ inputs.pip_install || 'numpy' }}
-          RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup"cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
+          RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
 
   unittests_check_macos_py313:
     if: ${{ inputs.macos && inputs.python_3_13 }}
