@@ -59,7 +59,6 @@ jobs:
     strategy:
       matrix:
         python: [
-            { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
             { py: '3.12', interpreter: "python3.12" },
@@ -83,7 +82,7 @@ jobs:
           pytest tests/
 
   test_python_linux_py313:
-    name: test_python_linux_py313
+    name: test_python_linux_python3.13
     if: ${{ inputs.python_3_13 }}
     runs-on: "ubuntu-latest"
     steps:
@@ -113,7 +112,6 @@ jobs:
     strategy:
       matrix:
         python: [
-            { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
             { py: '3.12', interpreter: "python3.12" },
@@ -138,7 +136,7 @@ jobs:
 
   test_python_windows_py313:
     if: ${{ inputs.windows && inputs.python_3_13 }}
-    name: test_python_windows_py313
+    name: test_python_windows_python3.13
     runs-on: "windows-latest"
     steps:
       - uses: actions/checkout@v3
@@ -167,7 +165,6 @@ jobs:
     strategy:
       matrix:
         python: [
-            { py: "3.9", interpreter: "python3.9" },
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
             { py: '3.12', interpreter: "python3.12" },
@@ -192,7 +189,7 @@ jobs:
   
   test_python_macos_py3_13:
     if: ${{ inputs.macos && inputs.python_3_13 }}
-    name: test_python_macos_py313
+    name: test_python_macos_python3.13
     runs-on: "macOS-13"
     steps:
       - uses: actions/checkout@v3
