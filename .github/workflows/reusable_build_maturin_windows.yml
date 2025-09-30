@@ -53,16 +53,16 @@ jobs:
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
-      - name: Build Windows Wheels (py3.9-3.12)
+      - name: Build Windows Wheels (py3.10-3.12)
         uses: PyO3/maturin-action@v1
         with:
           maturin-version: latest
           command: build
-          args: --out wheels -m ${{ inputs.py_interface_folder }}/Cargo.toml --release --locked -i python3.9 python3.10 python3.11 python3.12
+          args: --out wheels -m ${{ inputs.py_interface_folder }}/Cargo.toml --release --locked -i python3.10 python3.11 python3.12
       - name: Store Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: windows_wheels_p_3.9_3.10_3.11_3.12
+          name: windows_wheels_p_3.10_3.11_3.12
           path: wheels
   
   maturin_build_windows_py313:

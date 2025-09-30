@@ -56,17 +56,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Build Linux Wheels (py3.9-3.12)
+      - name: Build Linux Wheels (py3.10-3.12)
         uses: PyO3/maturin-action@v1
         with:
           maturin-version: latest
           command: build
           manylinux: 2014
-          args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked -i python3.9 python3.10 python3.11 python3.12
+          args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked -i python3.10 python3.11 python3.12
       - name: Store Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux_wheels_p_3.9_3.10_3.11_3.12
+          name: linux_wheels_p_3.10_3.11_3.12
           path: wheels
 
   maturin_build_linux_py313:
@@ -106,17 +106,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Build Linux Wheels (py3.9-3.12 arm)
+      - name: Build Linux Wheels (py3.10-3.12 arm)
         uses: PyO3/maturin-action@v1
         with:
           maturin-version: latest
           command: build
           manylinux: 2014
-          args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked -i python3.9 python3.10 python3.11 python3.12
+          args: --out wheels -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked -i python3.10 python3.11 python3.12
       - name: Store Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux_arm_wheels_p_3.9_3.10_3.11_3.12
+          name: linux_arm_wheels_p_3.10_3.11_3.12
           path: wheels
   
   maturin_build_linux_arm_py313:
