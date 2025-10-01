@@ -70,7 +70,7 @@ jobs:
           python -m pip install maturin
       - name: Set RUSTFLAGS
         run: |
-          if [ "${{ inputs.universal2 }}" = "true" ]; then
+          if [ ${{ inputs.universal2 }} ]; then
             RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" \
             maturin build -i ${{ matrix.python.interpreter }} --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked --target universal2-apple-darwin
           else
@@ -100,7 +100,7 @@ jobs:
           python -m pip install maturin setuptools
       - name: Set RUSTFLAGS and Build
         run: |
-          if [ "${{ inputs.universal2 }}" = "true" ]; then
+          if [ ${{ inputs.universal2 }} ]; then
             RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" \
             maturin build -i "python3.14" --out wheels  -m ${{ inputs.py_interface_folder }}/Cargo.toml --release --locked --target universal2-apple-darwin
           else
