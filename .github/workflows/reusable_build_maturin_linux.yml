@@ -71,7 +71,7 @@ jobs:
 
   maturin_build_linux_py314:
     if: ${{ inputs.python_3_14 }}
-    name: maturin_build_linux_py314
+    name: maturin_build_linux_python_3.14
     runs-on: 'ubuntu-latest'
     steps:
       - uses: actions/checkout@v4
@@ -120,7 +120,7 @@ jobs:
           path: wheels
   
   maturin_build_linux_arm_py314:
-    name: maturin_build_linux_arm_py314
+    name: maturin_build_linux_arm_python_3.14
     if: ${{ inputs.build_for_arm && inputs.python_3_14 }}
     runs-on: 'ubuntu-24.04-arm'
     steps:

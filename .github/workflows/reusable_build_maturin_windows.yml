@@ -57,7 +57,7 @@ jobs:
   
   maturin_build_windows_py314:
     if: ${{ inputs.python_3_14 }}
-    name: maturin_build_windows_py314
+    name: maturin_build_windows_python_3.14
     runs-on: 'windows-latest'
     steps:
       - uses: actions/checkout@v4
