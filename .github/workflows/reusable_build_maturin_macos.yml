@@ -93,6 +93,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
+          target: "x86_64-apple-darwin"
           toolchain: stable
       - uses: actions/setup-python@v5
         with:
@@ -102,12 +103,12 @@ jobs:
           python -m pip install --upgrade pip pytest numpy twine
           python -m pip install maturin setuptools
       - name: Set RUSTFLAGS and Build with universal2 Flag
-        if: ${{ inputs.universal2 == 'true' }}
+        if: ${{ inputs.universal2 }}
         run: |
             RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" \
             maturin build -i "python3.14" --out wheels  -m ${{ inputs.py_interface_folder }}/Cargo.toml --release --locked --target universal2-apple-darwin
       - name: Set RUSTFLAGS and Build
-        if: ${{ inputs.universal2 == 'false' }}
+        if: ${{ !inputs.universal2 }}
         run: |
             RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" \
             maturin build -i "python3.14" --out wheels  -m ${{ inputs.py_interface_folder }}/Cargo.toml --release --locked
