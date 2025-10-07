@@ -26,10 +26,10 @@ on:
         description: "Name of the pure rust package to doctest"
         required: false
         type: string
-      python_3_13:
-        description: "Run unittest on Python 3.13"
+      python_3_14:
+        description: "Run unittest on Python 3.14"
         required: false
-        default: true
+        default: false
         type: boolean
       features:
         description: "Additional features to be enabled for the Rust package separated with commas or whitespaces"
@@ -60,10 +60,10 @@ on:
         description: "Name of the pure rust package to doctest"
         required: false
         type: string
-      python_3_13:
-        description: "Run unittest on Python 3.13"
+      python_3_14:
+        description: "Run unittest on Python 3.14"
         required: false
-        default: true
+        default: false
         type: boolean
       features:
         description: "Additional features to be enabled for the Rust package separated with commas or whitespaces"
@@ -86,6 +86,7 @@ jobs:
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
             { py: "3.12", interpreter: "python3.12" },
+            { py: "3.13", interpreter: "python3.13" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -99,9 +100,9 @@ jobs:
           python -m pip install ${{ inputs.pip_install || 'numpy' }}
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
 
-  unittests_check_windows_py313:
-    if: ${{ inputs.windows && inputs.python_3_13 }}
-    name: unittests_check_windows_python3.13
+  unittests_check_windows_py314:
+    if: ${{ inputs.windows && inputs.python_3_14 }}
+    name: unittests_check_windows_python3.14
     runs-on: "windows-latest"
     steps:
       - uses: actions/checkout@v3
@@ -110,7 +111,7 @@ jobs:
           toolchain: stable
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.14"
       - run: |
           python -m pip install ${{ inputs.pip_install || 'numpy' }}
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
@@ -118,7 +119,7 @@ jobs:
   unittests_check_macos:
     if: ${{ inputs.macos }}
     name: unittests_check_macos_${{ matrix.python.interpreter }}
-    runs-on: "macOS-13"
+    runs-on: "macOS-15"
     strategy:
       matrix:
         python:
@@ -126,6 +127,7 @@ jobs:
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
             { py: "3.12", interpreter: "python3.12" },
+            { py: "3.13", interpreter: "python3.13" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -139,10 +141,10 @@ jobs:
           python -m pip install ${{ inputs.pip_install || 'numpy' }}
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
 
-  unittests_check_macos_py313:
-    if: ${{ inputs.macos && inputs.python_3_13 }}
-    name: unittests_check_macos_python3.13
-    runs-on: "macOS-13"
+  unittests_check_macos_py314:
+    if: ${{ inputs.macos && inputs.python_3_14 }}
+    name: unittests_check_macos_python3.14
+    runs-on: "macOS-15"
     steps:
       - uses: actions/checkout@v3
       - uses: actions-rust-lang/setup-rust-toolchain@v1
@@ -150,7 +152,7 @@ jobs:
           toolchain: stable
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.14"
       - run: |
           python -m pip install ${{ inputs.pip_install || 'numpy' }}
           RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
@@ -165,6 +167,7 @@ jobs:
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
             { py: "3.12", interpreter: "python3.12" },
+            { py: "3.13", interpreter: "python3.13" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -180,9 +183,9 @@ jobs:
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"
           cargo fmt --all -- --check
 
-  unittests_check_linux_py313:
-    if: ${{ inputs.python_3_13 }}
-    name: unittests_check_linux_python3.13
+  unittests_check_linux_py314:
+    if: ${{ inputs.python_3_14 }}
+    name: unittests_check_linux_python3.14
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v3
@@ -192,7 +195,7 @@ jobs:
           components: rustfmt
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.14"
       - run: |
           python -m pip install ${{ inputs.pip_install || 'numpy' }}
           cargo test --workspace --no-default-features --locked --features "${{ inputs.features || '' }}"

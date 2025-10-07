@@ -21,10 +21,10 @@ on:
         required: false
         default: true
         type: boolean
-      python_3_13:
-        description: "Run unittest on Python 3.13"
+      python_3_14:
+        description: "Run unittest on Python 3.14"
         required: false
-        default: true
+        default: false
         type: boolean
   workflow_call:
     inputs:
@@ -46,10 +46,10 @@ on:
         required: false
         default: true
         type: boolean
-      python_3_13:
-        description: "Run unittest on Python 3.13"
+      python_3_14:
+        description: "Run unittest on Python 3.14"
         required: false
-        default: true
+        default: false
         type: boolean
 
 jobs:
@@ -62,6 +62,7 @@ jobs:
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
             { py: '3.12', interpreter: "python3.12" },
+            { py: '3.13', interpreter: "python3.13" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -81,15 +82,15 @@ jobs:
           cd ${{ inputs.python_folder }}
           pytest tests/
 
-  test_python_linux_py313:
-    name: test_python_linux_python3.13
-    if: ${{ inputs.python_3_13 }}
+  test_python_linux_py314:
+    name: test_python_linux_python3.14
+    if: ${{ inputs.python_3_14 }}
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.14"
       - name: Install dependencies
         run: |
           pip install setuptools
@@ -115,6 +116,7 @@ jobs:
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
             { py: '3.12', interpreter: "python3.12" },
+            { py: '3.13', interpreter: "python3.13" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -134,15 +136,15 @@ jobs:
           cd ${{ inputs.python_folder }}
           pytest tests/
 
-  test_python_windows_py313:
-    if: ${{ inputs.windows && inputs.python_3_13 }}
-    name: test_python_windows_python3.13
+  test_python_windows_py314:
+    if: ${{ inputs.windows && inputs.python_3_14 }}
+    name: test_python_windows_python3.14
     runs-on: "windows-latest"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.14"
       - name: Install dependencies
         run: |
           pip install setuptools
@@ -161,13 +163,14 @@ jobs:
   test_python_macos:
     if: ${{ inputs.macos }}
     name: test_python_macos_${{ matrix.python.interpreter }}
-    runs-on: "macOS-13"
+    runs-on: "macOS-15"
     strategy:
       matrix:
         python: [
             { py: "3.10", interpreter: "python3.10" },
             { py: "3.11", interpreter: "python3.11" },
             { py: '3.12', interpreter: "python3.12" },
+            { py: '3.13', interpreter: "python3.13" },
           ]
     steps:
       - uses: actions/checkout@v4
@@ -187,15 +190,15 @@ jobs:
           cd ${{ inputs.python_folder }}
           pytest tests/
   
-  test_python_macos_py3_13:
-    if: ${{ inputs.macos && inputs.python_3_13 }}
-    name: test_python_macos_python3.13
-    runs-on: "macOS-13"
+  test_python_macos_py3_14:
+    if: ${{ inputs.macos && inputs.python_3_14 }}
+    name: test_python_macos_python3.14
+    runs-on: "macOS-15"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.14"
       - name: Install dependencies
         run: |
           pip install setuptools
