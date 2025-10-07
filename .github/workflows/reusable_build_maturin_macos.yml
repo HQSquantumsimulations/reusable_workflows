@@ -69,12 +69,12 @@ jobs:
           python -m pip install --upgrade pip pytest numpy twine
           python -m pip install maturin
       - name: Set RUSTFLAGS and Build with universal2 Flag
-        if: ${{ inputs.universal2 == 'true' }}
+        if: ${{ inputs.universal2 }}
         run: |
             RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" \
             maturin build -i ${{ matrix.python.interpreter }} --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked --target universal2-apple-darwin
       - name: Set RUSTFLAGS and Build
-        if: ${{ inputs.universal2 == 'false' }}
+        if: ${{ !inputs.universal2 }}
         run: |
             RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" \
             maturin build -i ${{ matrix.python.interpreter }} --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
