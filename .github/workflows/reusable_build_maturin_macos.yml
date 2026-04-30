@@ -62,7 +62,7 @@ jobs:
         with:
           target: "x86_64-apple-darwin"
           toolchain: stable
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python.py }}
       - name: Install dependencies
@@ -95,7 +95,7 @@ jobs:
         with:
           target: "x86_64-apple-darwin"
           toolchain: stable
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.14'
       - name: Install Dependencies
@@ -123,7 +123,7 @@ jobs:
     needs: maturin_build_macos
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/setup-python@v5
+    - uses: actions/setup-python@v6
       with:
         python-version: "3.13"
     - uses: actions/download-artifact@v4
