@@ -50,7 +50,7 @@ jobs:
           command: build
           args: --out wheels -m ${{ inputs.py_interface_folder }}/Cargo.toml --release --locked -i python3.10 python3.11 python3.12 python3.13
       - name: Store Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: windows_wheels_p_3.10_3.11_3.12_3.13
           path: wheels
@@ -74,7 +74,7 @@ jobs:
           command: build
           args: --out wheels -m ${{ inputs.py_interface_folder }}/Cargo.toml --release --locked -i python3.14
       - name: Store Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: windows_wheels_p_3.14
           path: wheels

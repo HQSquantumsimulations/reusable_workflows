@@ -80,7 +80,7 @@ jobs:
             RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" \
             maturin build -i ${{ matrix.python.interpreter }} --out wheels  -m ${{inputs.py_interface_folder}}/Cargo.toml --release --locked
       - name: Store Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: macos_wheels_p_${{ matrix.python.py }}
           path: wheels
@@ -113,7 +113,7 @@ jobs:
             RUSTFLAGS="-C link-arg=-undefined -C link-arg=dynamic_lookup" \
             maturin build -i "python3.14" --out wheels  -m ${{ inputs.py_interface_folder }}/Cargo.toml --release --locked
       - name: Store Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: macos_wheels_p_3.14
           path: wheels
