@@ -89,7 +89,7 @@ jobs:
             { py: "3.13", interpreter: "python3.13" },
           ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
@@ -105,7 +105,7 @@ jobs:
     name: unittests_check_windows_python3.14
     runs-on: "windows-latest"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
@@ -130,7 +130,7 @@ jobs:
             { py: "3.13", interpreter: "python3.13" },
           ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
@@ -146,7 +146,7 @@ jobs:
     name: unittests_check_macos_python3.14
     runs-on: "macOS-15"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
@@ -170,7 +170,7 @@ jobs:
             { py: "3.13", interpreter: "python3.13" },
           ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
@@ -188,7 +188,7 @@ jobs:
     name: unittests_check_linux_python3.14
     runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
@@ -205,7 +205,7 @@ jobs:
     name: check_doctest
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
@@ -221,7 +221,7 @@ jobs:
     if: ${{ inputs.test_code_coverage }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
