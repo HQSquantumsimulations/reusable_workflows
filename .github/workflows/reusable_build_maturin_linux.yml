@@ -49,7 +49,7 @@ jobs:
     name: maturin_build_linux
     runs-on: 'ubuntu-latest'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
@@ -74,7 +74,7 @@ jobs:
     name: maturin_build_linux_python_3.14
     runs-on: 'ubuntu-latest'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
@@ -99,7 +99,7 @@ jobs:
     if: ${{ inputs.build_for_arm }}
     runs-on: 'ubuntu-24.04-arm'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
@@ -124,7 +124,7 @@ jobs:
     if: ${{ inputs.build_for_arm && inputs.python_3_14 }}
     runs-on: 'ubuntu-24.04-arm'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
@@ -148,7 +148,7 @@ jobs:
     name: maturin_build_linux_src
     runs-on: 'ubuntu-latest'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: stable
